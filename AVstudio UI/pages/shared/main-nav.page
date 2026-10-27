@@ -1,0 +1,312 @@
+{
+    "uuid": "9c85a3de-60b6-44a6-96d4-d4521b6286c0",
+    "name": "main-nav",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 0,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 0,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "1060d1bf-5d83-42b3-85fc-0cdacb254b91",
+            "name": "Main Nav",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "2e38abf4-13c9-48e7-b57c-930d39ab9529",
+                    "type": "button",
+                    "name": "Home",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_home.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 144,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 80,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Home",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#629BFC"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_home_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "uuid": "d69b17a0-6c27-44c5-aa69-37c8890580da",
+                            "name": "Home",
+                            "behaviour": "onPress",
+                            "type": "r",
+                            "pageFlipTarget": "/"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "19dab183-cf18-4cf8-9eb4-5be548397377",
+                    "type": "button",
+                    "name": "Floormap",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_floormap.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 144,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 80,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Floormap",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#629BFC"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_floormap_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "3591ed0c-68a8-40e7-9901-1010a7e2e6db",
+                    "type": "button",
+                    "name": "Rooms",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_rooms.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 144,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 80,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Rooms",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#629BFC"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_rooms_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "gap": {
+                "value": 0,
+                "unit": "px"
+            }
+        }
+    ],
+    "parameters": {
+        "focus": {
+            "type": "string",
+            "defaultValue": "None"
+        }
+    }
+}

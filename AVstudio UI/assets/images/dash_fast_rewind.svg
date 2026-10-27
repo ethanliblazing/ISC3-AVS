@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="fast_rewind">
+<mask id="mask0_0_788" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="80" height="80">
+<rect id="Bounding box" width="80" height="80" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_788)">
+<path id="fast_rewind_2" d="M71.6665 56.263C71.6665 57.8604 69.8862 58.8131 68.5571 57.9271L44.1626 41.6641C42.9751 40.8725 42.9752 39.1275 44.1626 38.3359L68.5571 22.0729C69.8862 21.1869 71.6665 22.1396 71.6665 23.737V56.263ZM38.3331 56.263C38.3331 57.8604 36.5528 58.8131 35.2237 57.9271L10.8293 41.6641C9.64181 40.8725 9.64181 39.1275 10.8293 38.3359L35.2237 22.0729C36.5528 21.1869 38.3331 22.1396 38.3331 23.737V56.263Z" fill="#4F4F56"/>
+</g>
+</g>
+</svg>

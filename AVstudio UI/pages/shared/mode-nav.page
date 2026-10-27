@@ -1,0 +1,738 @@
+{
+    "uuid": "1580fd42-a7b3-4a28-a480-584ee908cf94",
+    "name": "mode-nav",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 0,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 0,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "77a7a893-84ca-46cf-93f0-f7f334789ddf",
+            "name": "Mode Nav",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "444d948f-47bc-4e3d-ae18-c83b6e5698d0",
+                    "type": "button",
+                    "name": "Climate",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_climate.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Climate",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_climate_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "cd4b819c-88b9-4545-b210-b6bf8f8ed104",
+                    "type": "button",
+                    "name": "Lights",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_lighting.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Lights",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_lighting_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "39a058f5-3b56-465e-ac87-f8c5749aa7c0",
+                    "type": "button",
+                    "name": "Blinds",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_blinds.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Blinds",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_blinds_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "ad2aec28-e616-42c6-b88b-6cc2f32061e3",
+                    "type": "button",
+                    "name": "Audio",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_audio.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Audio",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_audio_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "cabf7801-199c-4226-bf4f-5dd8136492f0",
+                    "type": "button",
+                    "name": "Video",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_video.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Video",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_video_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "6cf43276-a133-4c90-bdfb-b014b52b7cf6",
+                    "type": "button",
+                    "name": "Security",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_security.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Security",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_security_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "25d1dcbc-433c-461c-a41b-9b0401a03569",
+                    "type": "button",
+                    "name": "Cameras",
+                    "cssClass": "button isc-press-nav isc-rotate-180",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_cameras.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Cameras",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_cameras_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-rotate-180 isc-selected"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "b9bfb0dc-bc07-413a-95ef-dc82da25a5df",
+                    "type": "button",
+                    "name": "Pool",
+                    "cssClass": "button isc-press-nav",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_nav_pool.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 56,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 48,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 16,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 48,
+                            "unit": "px"
+                        }
+                    },
+                    "activeModeIndex": "%focus%",
+                    "width": {
+                        "width": {
+                            "value": 152,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 88,
+                            "unit": "px"
+                        }
+                    },
+                    "modes": [
+                        {
+                            "name": "Pool",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_nav_pool_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-nav isc-selected"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "gap": {
+                "value": 0,
+                "unit": "px"
+            }
+        }
+    ],
+    "parameters": {
+        "focus": {
+            "type": "string",
+            "defaultValue": "None"
+        }
+    }
+}

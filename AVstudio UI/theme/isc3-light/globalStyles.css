@@ -1,0 +1,79 @@
+/* === ISC3 Light theme styles ===
+   Injected only while theme/isc3-light/isc3-light.theme is active.
+   Selected states are element modes (driven by global variables); the
+   rules below add the momentary pressed (:active) states from the Figma
+   "All Page Controls" VT-Pro export (node 1299:38150). Background changes
+   override both the base and the "final" button variables so they also
+   win over the mode's own variables. Buttons that are already selected
+   (class isc-selected, added by their selected mode) keep their look. */
+
+/* ---------- Dashboard card buttons (Lighting / Security) ----------
+   normal #E4E4E9 · pressed #EDEFF3 + 2px #E4E4E9 border · selected #4F4F56.
+   The 2px border is drawn as an inset outline: an element border leaves
+   light seams at the corners around the background layer. */
+.isc-chip {
+    justify-content: flex-start;
+}
+.isc-chip:not(.isc-selected):active {
+    --av-element-button-backgroundColor: #edeff3 !important;
+    --av-element-button-finalBackgroundColor: #edeff3 !important;
+    outline: 2px solid #e4e4e9;
+    outline-offset: -2px;
+}
+
+/* ---------- Temperature up/down ----------
+   normal #EDEFF3 + #E4E4E9 border · pressed #E4E4E9 + #EDEFF3 border. */
+.isc-press-temp {
+    outline: 2px solid #e4e4e9;
+    outline-offset: -2px;
+}
+.isc-press-temp:active {
+    --av-element-button-backgroundColor: #e4e4e9 !important;
+    --av-element-button-finalBackgroundColor: #e4e4e9 !important;
+    outline-color: #edeff3;
+}
+
+/* ---------- Climate mode toggle, primary & secondary nav buttons ----------
+   normal transparent · pressed #EDEFF3 · selected via mode. */
+.isc-press-seg:not(.isc-selected):active,
+.isc-press-nav:not(.isc-selected):active {
+    --av-element-button-backgroundColor: #edeff3 !important;
+    --av-element-button-finalBackgroundColor: #edeff3 !important;
+}
+
+/* ---------- 64x64 round icon buttons (shuffle, loop, mute, volume -/+) ----------
+   pressed = #EDEFF3 circle behind the 40px icon (12px ring = 64px button). */
+.isc-press-circle:active {
+    background-color: #edeff3;
+    border-radius: 50%;
+    box-shadow: 0 0 0 12px #edeff3;
+}
+.isc-press-mute:active img {
+    content: url("../../assets/images/dash_no_sound_muted.svg");
+}
+
+/* ---------- Transport: pressed icons turn medium grey ----------
+   url()s are relative to this file (theme/isc3-light/), not the page. */
+.isc-press-rewind:active img {
+    content: url("../../assets/images/dash_fast_rewind_pressed.svg");
+}
+.isc-press-forward:active img {
+    content: url("../../assets/images/dash_fast_forward_pressed.svg");
+}
+.isc-press-pause:active img {
+    content: url("../../assets/images/dash_pause_pressed.svg");
+}
+.isc-press-play:active img {
+    content: url("../../assets/images/dash_play_pressed.svg");
+}
+
+/* ---------- Bare icons with no exported pressed state ----------
+   (back, menu, card arrows, camera feed): dim while pressed. */
+.isc-press-icon:active {
+    opacity: 0.5;
+}
+
+/* Icon orientation fix the Figma file applies as a layer transform. */
+.isc-rotate-180 img {
+    transform: rotate(180deg); /* security camera icon is rotated in the nav bar */
+}

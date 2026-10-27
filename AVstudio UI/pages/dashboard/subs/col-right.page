@@ -1,0 +1,103 @@
+{
+    "uuid": "e23d3386-764e-4aeb-b131-24fdf5879421",
+    "name": "col-right",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 20,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 0,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "66c8e896-6659-47c0-b7fa-603e899bb863",
+            "name": "Audio Card",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "de85edf8-9643-43e3-8ef3-cb53c038ce4f",
+                    "type": "subpage",
+                    "name": "Audio",
+                    "cssClass": "subpage",
+                    "subpageName": "./card-audio.page",
+                    "inputParameters": {},
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "background": {
+                        "color": "#FFFFFF"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    }
+                }
+            ],
+            "size": {
+                "value": 76,
+                "unit": "%",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "424afae9-1d19-472c-9075-182ef6b29073",
+            "name": "Volume Card",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "f510c645-15ff-415e-9c93-5e7bb48fee32",
+                    "type": "subpage",
+                    "name": "Volume",
+                    "cssClass": "subpage",
+                    "subpageName": "./card-volume.page",
+                    "inputParameters": {},
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "background": {
+                        "color": "#FFFFFF"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    }
+                }
+            ]
+        }
+    ]
+}

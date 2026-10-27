@@ -1,0 +1,218 @@
+{
+    "uuid": "3dddd133-f8a0-4b63-83d7-262aea907590",
+    "name": "start",
+    "cssClass": "page",
+    "layout": "responsive",
+    "containers": [
+        {
+            "uuid": "8d99cad0-90d3-4bc4-880a-a6656545e59d",
+            "name": "Header",
+            "elements": [
+                {
+                    "uuid": "a4cf4e1e-b525-4c23-bfad-e70b50f720df",
+                    "type": "text",
+                    "name": "GreetingMessage",
+                    "text": "Text",
+                    "boxShadow": {
+                        "color": "black",
+                        "blur": 50
+                    },
+                    "boxReflect": {
+                        "position": "bottom",
+                        "offset": 1,
+                        "startOpacity": 80,
+                        "endOpacity": 0
+                    },
+                    "attachedDatasource": {
+                        "datasource": null,
+                        "steps": []
+                    },
+                    "fontSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "textColor": "4F4F56",
+                    "iconColor": "darkgrey"
+                }
+            ],
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "size": {
+                "manualMode": true,
+                "unit": "rem",
+                "value": 9.75
+            },
+            "distribution": "flex-start",
+            "paddingOptions": {
+                "paddingLeft": {
+                    "unit": "px",
+                    "value": 24
+                },
+                "paddingRight": {
+                    "unit": "px",
+                    "value": 24
+                }
+            }
+        },
+        {
+            "uuid": "d342c40a-3a94-48b0-8e26-e23157ebc759",
+            "name": "DashboardCenter",
+            "elements": [
+                {
+                    "uuid": "1380ca0e-3360-4054-8349-04993bbd71ed",
+                    "type": "button",
+                    "name": "LightButton",
+                    "cssClass": "button",
+                    "text": "Button",
+                    "boxShadow": {
+                        "color": "black",
+                        "blur": 50
+                    },
+                    "boxReflect": {
+                        "position": "bottom",
+                        "offset": 1,
+                        "startOpacity": 80,
+                        "endOpacity": 0
+                    },
+                    "attachedDatasource": {
+                        "datasource": null,
+                        "steps": []
+                    },
+                    "textColor": "rgba(79, 79, 86, 1)",
+                    "background": {
+                        "color": "rgba(255, 255, 255, 1)",
+                        "customBackgroundImage": false
+                    },
+                    "iconName": "MdLightbulb",
+                    "iconSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "iconColor": "4F4F56",
+                    "gap": {
+                        "value": 1,
+                        "unit": "rem"
+                    },
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "width": {
+                        "width": {
+                            "value": 166,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 80,
+                            "unit": "px"
+                        }
+                    },
+                    "left": "626px",
+                    "allowTextWrap": true,
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 8
+                    }
+                }
+            ],
+            "cssClass": "container",
+            "size": {
+                "manualMode": false,
+                "unit": "rem",
+                "value": 68
+            },
+            "align": "flex-start",
+            "distribution": "flex-start",
+            "flow": "column",
+            "paddingOptions": {
+                "paddingTop": {
+                    "value": 24,
+                    "unit": "px"
+                },
+                "paddingLeft": {
+                    "value": 24,
+                    "unit": "px"
+                },
+                "paddingRight": {
+                    "value": 24,
+                    "unit": "px"
+                },
+                "paddingBottom": {
+                    "value": 24,
+                    "unit": "px"
+                }
+            },
+            "gap": {
+                "value": 24,
+                "unit": "px"
+            }
+        },
+        {
+            "uuid": "6cf56887-0106-4d97-acc7-b5de994abfca",
+            "name": "Footer",
+            "elements": [
+                {
+                    "uuid": "4b9bd604-c291-4833-b451-d8c53fffc152",
+                    "type": "button",
+                    "name": "Button_2",
+                    "cssClass": "button",
+                    "text": "Button",
+                    "boxShadow": {
+                        "color": "black",
+                        "blur": 50
+                    },
+                    "boxReflect": {
+                        "position": "bottom",
+                        "offset": 1,
+                        "startOpacity": 80,
+                        "endOpacity": 0
+                    },
+                    "attachedDatasource": {
+                        "datasource": null,
+                        "steps": []
+                    },
+                    "textColor": "black",
+                    "width": {
+                        "width": {
+                            "value": null,
+                            "unit": "rem"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": null,
+                            "unit": "rem"
+                        }
+                    }
+                }
+            ],
+            "cssClass": "container",
+            "flow": "row",
+            "align": "flex-start",
+            "size": {
+                "manualMode": true,
+                "unit": "rem",
+                "uuid": "0c757e7f-75bf-4408-99c7-4e7c7bf785b8",
+                "value": 9.75
+            }
+        }
+    ],
+    "gap": {
+        "value": 0,
+        "unit": "px"
+    },
+    "border": {
+        "useBorder": false
+    },
+    "background": {
+        "color": "rgba(25, 25, 25, 1)",
+        "customBackgroundImage": false,
+        "videoBackground": {
+            "enabled": false
+        }
+    },
+    "flow": "column"
+}

@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="roller_shades_closed">
+<mask id="mask0_0_10" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="56" height="56">
+<rect id="Bounding box" width="56" height="56" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_10)">
+<path id="roller_shades_closed_2" d="M4.66667 49V44.3333H9.33333V7H46.6667V44.3333H51.3333V49H32.0833C32.0833 50.1278 31.6847 51.0903 30.8875 51.8875C30.0903 52.6847 29.1278 53.0833 28 53.0833C26.8722 53.0833 25.9097 52.6847 25.1125 51.8875C24.3153 51.0903 23.9167 50.1278 23.9167 49H4.66667ZM14 44.3333H25.6667V39.6667H14V44.3333ZM30.3333 44.3333H42V39.6667H30.3333V44.3333Z" fill="white"/>
+</g>
+</g>
+</svg>

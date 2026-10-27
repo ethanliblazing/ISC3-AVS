@@ -1,0 +1,9 @@
+/* === Theme styles ===
+   CSS in this file applies to the whole project only while this theme is
+   active in Project Settings. Switch to another theme and these rules are
+   removed.
+
+   Use it for theme-level tweaks the theme keys cannot express (custom
+   classes, animations, overrides that travel with the theme). You can add
+   more *.css files next to this one — any name, any number: every sibling
+   *.css of this theme is injected while the theme is active. */

@@ -1,0 +1,612 @@
+{
+    "uuid": "82960d65-ee13-45fc-adf0-ee1fba5ae76a",
+    "name": "card-audio",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 12,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 24,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "6a5634a1-6e9c-443d-b8c6-b47763418d1f",
+            "name": "Audio Title",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "ea5288ee-294f-45fc-976b-c226ba36cae8",
+                    "type": "text",
+                    "name": "Audio Title",
+                    "cssClass": "text",
+                    "text": "<p>Audio</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56",
+                    "gap": {
+                        "value": 12,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_cast_audio.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "right"
+                },
+                {
+                    "uuid": "b5f742b3-cc17-4dd0-aae0-705d55d5928b",
+                    "type": "stateControl",
+                    "name": "Audio Power",
+                    "cssClass": "stateControlElement",
+                    "variant": "switch",
+                    "text": "",
+                    "value": "$audioOn$",
+                    "textOn": "",
+                    "textOff": "",
+                    "backgroundUnchecked": "#E4E4E9",
+                    "thumbCheckedBackground": "#FFFFFF",
+                    "thumbUncheckedBackground": "#FFFFFF",
+                    "size": 48,
+                    "actions": [
+                        {
+                            "uuid": "2c5255a2-3eeb-4441-bbcb-b164baf98d3a",
+                            "name": "Set audioOn",
+                            "behaviour": "onChange",
+                            "type": "v",
+                            "attachedVariableName": "audioOn",
+                            "value": "",
+                            "onChangeActionUseCustomValue": true
+                        }
+                    ]
+                }
+            ],
+            "size": {
+                "value": 48,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "32064641-efc5-4366-851a-b345e3d65e85",
+            "name": "Album Art",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "center",
+            "elements": [
+                {
+                    "uuid": "e6a24d09-1fbc-43b9-b416-8e8dcc2eaa5d",
+                    "type": "image",
+                    "name": "Album Art",
+                    "cssClass": "image",
+                    "variant": "simple",
+                    "imgPath": "assets/images/dash_album_art.png",
+                    "useExternalUrl": false,
+                    "externalUrl": "",
+                    "isLazyLoad": false,
+                    "fillType": "cover",
+                    "fillAlignX": "center",
+                    "fillAlignY": "center",
+                    "opacity": 100,
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 3,
+                        "borderColor": "rgba(114, 114, 114, 0.1)",
+                        "borderStyle": "solid"
+                    },
+                    "width": {
+                        "width": {
+                            "value": 240,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 240,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "uuid": "569cadf0-6b7f-4e51-aa24-3e6173e53243",
+            "name": "Track Info",
+            "cssClass": "container",
+            "flow": "column",
+            "align": "center",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "6c2c2927-9dcf-4647-9725-322161b0be4e",
+                    "type": "text",
+                    "name": "Track Title",
+                    "cssClass": "text",
+                    "text": "<p>Man in The Mirror</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56"
+                },
+                {
+                    "uuid": "9952942e-71f9-430e-9fe5-05aebe8a85f1",
+                    "type": "text",
+                    "name": "Track Artist",
+                    "cssClass": "text",
+                    "text": "<p>Michael Jackson</p>",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "textColor": "#89898D"
+                }
+            ],
+            "gap": {
+                "value": 4,
+                "unit": "px"
+            },
+            "size": {
+                "value": 72,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "77e851bc-3bb3-43d8-8735-fc0c70195d02",
+            "name": "Progress",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "212da41e-8cc1-4cc0-9b8e-b4b8968fea4e",
+                    "type": "slider",
+                    "name": "Track Progress",
+                    "cssClass": "sliderElement",
+                    "variant": "simple",
+                    "isVertical": false,
+                    "reverse": false,
+                    "thumbWidth": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "thumbHeight": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "trackSize": {
+                        "value": 8,
+                        "unit": "px"
+                    },
+                    "trackBackground": "#E4E4E9",
+                    "progressStartColor": "#4F4F56",
+                    "progressEndColor": "#4F4F56",
+                    "valueTooltipVisibility": "hidden",
+                    "minValue": 0,
+                    "maxValue": 319,
+                    "step": 1,
+                    "directValue1": 201,
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 8,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "79a344a5-5206-4355-956f-151c5d7489aa",
+            "name": "Progress Labels",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "237caccc-e412-479a-84c9-96e5fa4b9489",
+                    "type": "text",
+                    "name": "Elapsed",
+                    "cssClass": "text",
+                    "text": "<p>3:21</p>",
+                    "fontSize": {
+                        "value": 22,
+                        "unit": "px"
+                    },
+                    "textColor": "#89898D"
+                },
+                {
+                    "uuid": "b13eda62-4025-45fd-a86c-87417fefec81",
+                    "type": "text",
+                    "name": "Duration",
+                    "cssClass": "text",
+                    "text": "<p>5:19</p>",
+                    "fontSize": {
+                        "value": 22,
+                        "unit": "px"
+                    },
+                    "textColor": "#89898D"
+                }
+            ],
+            "size": {
+                "value": 28,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "dbc37342-2a0c-4fe5-954f-c325ec22425e",
+            "name": "Transport",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "center",
+            "elements": [
+                {
+                    "uuid": "beaf97a8-c9df-495b-a333-a8c12b428c45",
+                    "type": "button",
+                    "name": "Shuffle",
+                    "cssClass": "button isc-press-circle",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_shuffle.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "b3b113df-a243-4fc3-9a37-c010d3ceb17a",
+                            "name": "Shuffle on",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "audioShuffle",
+                            "value": "true"
+                        }
+                    ],
+                    "activeModeIndex": "$audioShuffle$",
+                    "modes": [
+                        {
+                            "name": "On",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_shuffle_selected.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "7cad26e8-c40c-4262-b2f1-00977b1dd50f",
+                                        "name": "Shuffle off",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "audioShuffle",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "fb327fad-12d8-4537-9eca-f0a752167135",
+                    "type": "button",
+                    "name": "Rewind",
+                    "cssClass": "button isc-press-rewind",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_fast_rewind.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 80,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                },
+                {
+                    "uuid": "8c16dd13-da21-48ad-98a7-f9935e1f16d9",
+                    "type": "button",
+                    "name": "Play Pause",
+                    "cssClass": "button isc-press-pause",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_pause.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 88,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "ace49d05-41ca-4df9-a422-3486959c6bcc",
+                            "name": "Pause",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "audioPaused",
+                            "value": "true"
+                        }
+                    ],
+                    "activeModeIndex": "$audioPaused$",
+                    "modes": [
+                        {
+                            "name": "Paused",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_play.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-play",
+                                "actions": [
+                                    {
+                                        "uuid": "7888d85a-e59a-484e-845a-cfec837161e6",
+                                        "name": "Play",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "audioPaused",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "23f9e063-f05e-41d0-9015-bc23fde06d5a",
+                    "type": "button",
+                    "name": "Forward",
+                    "cssClass": "button isc-press-forward",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_fast_forward.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 80,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                },
+                {
+                    "uuid": "bf17a8ed-6dd0-4912-92b2-e31d4acdadb0",
+                    "type": "button",
+                    "name": "Repeat",
+                    "cssClass": "button isc-press-circle",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_repeat.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "19171f46-68cc-466a-ab70-ef48dcf46f78",
+                            "name": "Repeat on",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "audioRepeat",
+                            "value": "true"
+                        }
+                    ],
+                    "activeModeIndex": "$audioRepeat$",
+                    "modes": [
+                        {
+                            "name": "On",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_repeat_selected.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "48555cfe-79a9-44f2-b3cf-0d8206bff1e5",
+                                        "name": "Repeat off",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "audioRepeat",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "gap": {
+                "value": 36,
+                "unit": "px"
+            },
+            "size": {
+                "value": 88,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "04c45d53-65e4-48d8-9dcb-1e056677d31f",
+            "name": "Playing On",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "center",
+            "elements": [
+                {
+                    "uuid": "8b163643-8f1e-432c-b8db-79cc74a2786a",
+                    "type": "text",
+                    "name": "Playing On",
+                    "cssClass": "text",
+                    "text": "<p>Playing on <span style=\"color: #629BFC\">Living Room + 2 Others</span></p>",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "textColor": "#89898D"
+                }
+            ],
+            "size": {
+                "value": 32,
+                "unit": "px",
+                "manualMode": true
+            }
+        }
+    ]
+}

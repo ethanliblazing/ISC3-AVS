@@ -1,0 +1,690 @@
+{
+    "uuid": "2d6931e2-a587-46ec-a0cf-8f4286a70a6e",
+    "name": "card-climate",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 32,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 24,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "7c369ee3-511c-455d-94ad-284404e2d970",
+            "name": "Climate Title",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "691184c4-91cd-4069-bacd-5ad3777c49a3",
+                    "type": "text",
+                    "name": "Climate Title",
+                    "cssClass": "text",
+                    "text": "<p>Climate</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56"
+                },
+                {
+                    "uuid": "6ac11ebb-308e-49e4-9d7c-c39702492f1a",
+                    "type": "button",
+                    "name": "Open Climate",
+                    "cssClass": "button isc-press-icon",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_arrow_forward_ios.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 36,
+                "unit": "px",
+                "manualMode": true
+            },
+            "paddingOptions": {}
+        },
+        {
+            "uuid": "1625c355-8f51-45a8-8ffd-116f939df380",
+            "name": "Gauge",
+            "cssClass": "container",
+            "flow": "column",
+            "align": "center",
+            "distribution": "center",
+            "elements": [
+                {
+                    "uuid": "2e60d235-e741-459b-8f4d-bc44a7cdad8a",
+                    "type": "text",
+                    "name": "Climate Gauge",
+                    "cssClass": "text",
+                    "text": "<p style=\"text-align: center\"><span style=\"font-family: 'DM Sans Medium'; font-size: 29px; color: #89898D\">Current Temp</span></p><p style=\"text-align: center\"><span style=\"font-size: 124px; color: #4F4F56\">20\u00b0</span></p><p style=\"text-align: center\"><span style=\"font-family: 'DM Sans Medium'; font-size: 32px; color: #F85A73\">Heating to 63\u00b0</span></p>",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56",
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 94,
+                            "unit": "px"
+                        }
+                    },
+                    "background": {
+                        "customBackgroundImage": true,
+                        "imgPath": "assets/images/dash_gauge.png",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "isLazyLoad": false,
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "top",
+                        "opacity": 100
+                    },
+                    "width": {
+                        "width": {
+                            "value": 401,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 362,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "uuid": "831e0c2c-8313-4f04-834d-380a81723cc9",
+            "name": "Setpoint",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "147e8efc-6bf7-402f-a9cc-862d3f539121",
+                    "type": "button",
+                    "name": "Cooler",
+                    "cssClass": "button isc-press-temp",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_arrow_cool_down.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 64,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "#EDEFF3"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    },
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "f7db4409-28af-4965-ab1f-38d5c414cff7",
+                    "type": "button",
+                    "name": "Warmer",
+                    "cssClass": "button isc-press-temp",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_arrow_warm_up.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 64,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "#EDEFF3"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    },
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                }
+            ],
+            "gap": {
+                "value": 16,
+                "unit": "px"
+            },
+            "size": {
+                "value": 116,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "d4277bad-c786-4d84-90b6-96f07b02fa98",
+            "name": "HVAC Mode",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "db76c173-544e-4183-b611-c41250960489",
+                    "type": "button",
+                    "name": "HVAC Off",
+                    "cssClass": "button isc-press-seg",
+                    "text": "<p>Off</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_hvac_off.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "top",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "textColor": "#89898D",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "gap": {
+                        "value": 4,
+                        "unit": "px"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "8a960d1a-0e61-4827-bf66-7ef4a7ea5143",
+                            "name": "Set hvacMode",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "hvacMode",
+                            "value": "Off"
+                        }
+                    ],
+                    "activeModeIndex": "$hvacMode$",
+                    "modes": [
+                        {
+                            "name": "Off",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_hvac_off_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-seg isc-selected"
+                            }
+                        }
+                    ],
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "679143ad-08ee-4cfd-a7a9-c393892df8b1",
+                    "type": "button",
+                    "name": "HVAC Cool",
+                    "cssClass": "button isc-press-seg",
+                    "text": "<p>Cool</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_hvac_cool.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "top",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "textColor": "#89898D",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "gap": {
+                        "value": 4,
+                        "unit": "px"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "16609104-ce54-4cc9-85a9-6aa546c7f1c7",
+                            "name": "Set hvacMode",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "hvacMode",
+                            "value": "Cool"
+                        }
+                    ],
+                    "activeModeIndex": "$hvacMode$",
+                    "modes": [
+                        {
+                            "name": "Cool",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_hvac_cool_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-seg isc-selected"
+                            }
+                        }
+                    ],
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "eae3cee9-32d8-4efc-9afe-49e66fa76c66",
+                    "type": "button",
+                    "name": "HVAC Heat",
+                    "cssClass": "button isc-press-seg",
+                    "text": "<p>Heat</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_hvac_heat.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "top",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "textColor": "#89898D",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "gap": {
+                        "value": 4,
+                        "unit": "px"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "eeedce53-7419-4e2c-8df5-177776f90baf",
+                            "name": "Set hvacMode",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "hvacMode",
+                            "value": "Heat"
+                        }
+                    ],
+                    "activeModeIndex": "$hvacMode$",
+                    "modes": [
+                        {
+                            "name": "Heat",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_hvac_heat_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-seg isc-selected"
+                            }
+                        }
+                    ],
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "6d8336eb-394b-46b1-b8ee-69a9d99b77f4",
+                    "type": "button",
+                    "name": "HVAC Auto",
+                    "cssClass": "button isc-press-seg",
+                    "text": "<p>Auto</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_hvac_auto.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconPosition": "top",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "textColor": "#89898D",
+                    "fontSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "gap": {
+                        "value": 4,
+                        "unit": "px"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 16,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "paddingTop": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingRight": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingBottom": {
+                            "value": 8,
+                            "unit": "px"
+                        },
+                        "paddingLeft": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "7d45020c-d294-4fe2-9de5-1051f8b8543f",
+                            "name": "Set hvacMode",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "hvacMode",
+                            "value": "Auto"
+                        }
+                    ],
+                    "activeModeIndex": "$hvacMode$",
+                    "modes": [
+                        {
+                            "name": "Auto",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_hvac_auto_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "cssClass": "button isc-press-seg isc-selected"
+                            }
+                        }
+                    ],
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 120,
+                "unit": "px",
+                "manualMode": true
+            },
+            "paddingOptions": {
+                "padding": {
+                    "value": 8,
+                    "unit": "px"
+                }
+            },
+            "background": {
+                "color": "#E4E4E9"
+            },
+            "border": {
+                "useBorder": true,
+                "borderRadius": 12,
+                "borderWidth": 2,
+                "borderColor": "#E4E4E9",
+                "borderStyle": "solid"
+            }
+        }
+    ]
+}

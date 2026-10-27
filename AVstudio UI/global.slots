@@ -1,0 +1,26 @@
+{
+    "top": {
+        "pageKey": null,
+        "visibleByDefault": true,
+        "visibleOnPages": [],
+        "hiddenOnPages": []
+    },
+    "left": {
+        "pageKey": null,
+        "visibleByDefault": true,
+        "visibleOnPages": [],
+        "hiddenOnPages": []
+    },
+    "right": {
+        "pageKey": null,
+        "visibleByDefault": true,
+        "visibleOnPages": [],
+        "hiddenOnPages": []
+    },
+    "bottom": {
+        "pageKey": null,
+        "visibleByDefault": true,
+        "visibleOnPages": [],
+        "hiddenOnPages": []
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "lightingScene": {
+        "type": "string",
+        "defaultValue": "",
+        "currentValue": ""
+    },
+    "frontDoor": {
+        "type": "string",
+        "defaultValue": "",
+        "currentValue": ""
+    },
+    "backDoor": {
+        "type": "string",
+        "defaultValue": "",
+        "currentValue": ""
+    },
+    "hvacMode": {
+        "type": "string",
+        "defaultValue": "Heat",
+        "currentValue": "Heat"
+    },
+    "audioOn": {
+        "type": "boolean",
+        "defaultValue": true,
+        "currentValue": true
+    },
+    "audioPaused": {
+        "type": "boolean",
+        "defaultValue": false,
+        "currentValue": false
+    },
+    "audioMuted": {
+        "type": "boolean",
+        "defaultValue": false,
+        "currentValue": false
+    },
+    "audioVolume": {
+        "type": "number",
+        "defaultValue": 0,
+        "currentValue": 0
+    },
+    "audioShuffle": {
+        "type": "boolean",
+        "defaultValue": false,
+        "currentValue": false
+    },
+    "audioRepeat": {
+        "type": "boolean",
+        "defaultValue": false,
+        "currentValue": false
+    }
+}

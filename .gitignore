@@ -1,0 +1,21 @@
+# MCP config (local paths, user-specific)
+.mcp.json
+.vscode/mcp.json
+.cursor/mcp.json
+
+# opencode (per-user settings)
+opencode.json
+.opencode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (custom functions)
+node_modules/

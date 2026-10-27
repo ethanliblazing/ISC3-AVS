@@ -1,0 +1,327 @@
+{
+    "uuid": "2c654077-cc0a-4013-8352-24f8854d28fa",
+    "name": "card-security",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 16,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 24,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "91b442cd-f0a0-4543-8b2f-6e4d8445e09f",
+            "name": "Security Title",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "de3d7f16-5831-4c0e-b106-43230f03e012",
+                    "type": "text",
+                    "name": "Security Title",
+                    "cssClass": "text",
+                    "text": "<p>Security</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56"
+                },
+                {
+                    "uuid": "158a6541-bb6d-4b12-b85d-cc980f51de31",
+                    "type": "button",
+                    "name": "Open Security",
+                    "cssClass": "button isc-press-icon",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_arrow_forward_ios.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 36,
+                "unit": "px",
+                "manualMode": true
+            },
+            "paddingOptions": {}
+        },
+        {
+            "uuid": "75bfffb0-d3d3-4d64-b0c8-476a4b5d9165",
+            "name": "Doors",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "9ae84de5-0bb9-4591-83b2-aea1ceba4344",
+                    "type": "button",
+                    "name": "Front Door",
+                    "cssClass": "button isc-chip",
+                    "text": "<p>Front Door</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_lock.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 18,
+                            "unit": "px"
+                        }
+                    },
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "cd956cdf-abfc-46dc-98d9-301a69c49963",
+                            "name": "Lock",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "frontDoor",
+                            "value": "Locked"
+                        }
+                    ],
+                    "activeModeIndex": "$frontDoor$",
+                    "modes": [
+                        {
+                            "name": "Locked",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_lock_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "fa461680-b9c6-4fdc-b4c4-0726a57690c3",
+                                        "name": "Unlock",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "frontDoor",
+                                        "value": "Unlocked"
+                                    }
+                                ],
+                                "cssClass": "button isc-chip isc-selected"
+                            }
+                        },
+                        {
+                            "name": "Unlocked",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_lock_open.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "49f3a8b8-4c53-45c9-b460-86d2cad94f87",
+                                        "name": "Lock",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "frontDoor",
+                                        "value": "Locked"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "uuid": "2e7aa3d8-5b6e-4ab2-bd17-35e973b2c732",
+                    "type": "button",
+                    "name": "Back Door",
+                    "cssClass": "button isc-chip",
+                    "text": "<p>Back Door</p>",
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_lock.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 12,
+                        "borderWidth": 0
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 18,
+                            "unit": "px"
+                        }
+                    },
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "50470351-4bb3-4ecb-acce-bd8d5083d010",
+                            "name": "Lock",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "backDoor",
+                            "value": "Locked"
+                        }
+                    ],
+                    "activeModeIndex": "$backDoor$",
+                    "modes": [
+                        {
+                            "name": "Locked",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "background": {
+                                    "color": "#4F4F56"
+                                },
+                                "textColor": "#FFFFFF",
+                                "fontFamily": "Product Sans Bold",
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_lock_active.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "fcb56195-3ab2-48d9-a037-8d5b587da001",
+                                        "name": "Unlock",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "backDoor",
+                                        "value": "Unlocked"
+                                    }
+                                ],
+                                "cssClass": "button isc-chip isc-selected"
+                            }
+                        },
+                        {
+                            "name": "Unlocked",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_lock_open.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "01a59f51-bae4-452c-a551-91a65f5d1358",
+                                        "name": "Lock",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "backDoor",
+                                        "value": "Locked"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "gap": {
+                "value": 24,
+                "unit": "px"
+            }
+        }
+    ]
+}

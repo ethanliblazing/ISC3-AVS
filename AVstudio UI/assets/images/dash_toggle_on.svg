@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="112" height="48" viewBox="0 0 112 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Primary Toggle">
+<rect width="112" height="48" rx="24" fill="#629BFC"/>
+<path id="Arrow 1" d="M24 16L24 32" stroke-width="3" stroke-linecap="round" stroke="#5176B7"/>
+<g id="Toggle button">
+<rect x="44" y="4" width="64" height="40" rx="20" fill="white"/>
+</g>
+</g>
+</svg>

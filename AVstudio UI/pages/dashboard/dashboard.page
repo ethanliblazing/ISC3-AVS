@@ -1,0 +1,349 @@
+{
+    "uuid": "92b94ca8-ce32-4c4e-917b-72b9e1f619c5",
+    "name": "dashboard",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 20,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 40,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "#EDEFF3"
+    },
+    "containers": [
+        {
+            "uuid": "05452652-23e3-4e0e-b8dc-a5bda5a4d1de",
+            "name": "Header",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "1c2cdb35-b224-4a8d-94ed-55abaf071e37",
+                    "type": "button",
+                    "name": "Back",
+                    "cssClass": "button isc-press-icon",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_back.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 53,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "6ae9ba7e-9f83-4a98-9f53-b51d2aa95ca2",
+                            "name": "Back",
+                            "behaviour": "onPress",
+                            "type": "r",
+                            "pageFlipTarget": "-1"
+                        }
+                    ]
+                },
+                {
+                    "uuid": "4282fc28-8a8b-499f-82aa-b38134cf4664",
+                    "type": "text",
+                    "name": "Greeting",
+                    "cssClass": "text",
+                    "text": "<p>Good Afternoon</p>",
+                    "fontSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56",
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "c8b2592c-5ea0-4541-a129-668aa8e300c8",
+                    "type": "text",
+                    "name": "Outdoor Temp",
+                    "cssClass": "text",
+                    "text": "<p>24\u00b0</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#89898D",
+                    "gap": {
+                        "value": 4,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_weather_sun.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "iconPosition": "right"
+                },
+                {
+                    "uuid": "fa690888-3c43-47c8-b03c-d86ad3d5bc96",
+                    "type": "button",
+                    "name": "Menu",
+                    "cssClass": "button isc-press-icon",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "iconName": "MdMenu",
+                    "iconSize": {
+                        "value": 48,
+                        "unit": "px"
+                    },
+                    "iconColor": "#4F4F56",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "gap": {
+                "value": 28,
+                "unit": "px"
+            },
+            "size": {
+                "value": 62,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "951a8942-4e6d-456f-a8bb-872cd3d9a664",
+            "name": "Columns",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "d81577e4-802f-41bb-9819-8184301c5189",
+                    "type": "subpage",
+                    "name": "Left Column",
+                    "cssClass": "subpage",
+                    "subpageName": "./subs/col-left.page",
+                    "inputParameters": {},
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "af8078ac-5d70-4389-bf5d-fdc9abad19e7",
+                    "type": "subpage",
+                    "name": "Middle Column",
+                    "cssClass": "subpage",
+                    "subpageName": "./subs/col-middle.page",
+                    "inputParameters": {},
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                },
+                {
+                    "uuid": "08dac65f-0d94-42d1-a127-4da29199d670",
+                    "type": "subpage",
+                    "name": "Right Column",
+                    "cssClass": "subpage",
+                    "subpageName": "./subs/col-right.page",
+                    "inputParameters": {},
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                }
+            ],
+            "gap": {
+                "value": 20,
+                "unit": "px"
+            },
+            "paddingOptions": {
+                "paddingTop": {
+                    "value": 34,
+                    "unit": "px"
+                }
+            }
+        },
+        {
+            "uuid": "8f94c266-94c2-4238-942a-b6a9e025bdfd",
+            "name": "Navigation",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "d64cbd0d-57a1-4049-be27-05d353efaa9d",
+                    "type": "subpage",
+                    "name": "Main Nav",
+                    "cssClass": "subpage",
+                    "subpageName": "pages/shared/main-nav.page",
+                    "inputParameters": {
+                        "focus": "Home"
+                    },
+                    "width": {
+                        "width": {
+                            "value": 452,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "px"
+                        }
+                    },
+                    "background": {
+                        "color": "#FFFFFF"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 20,
+                        "borderWidth": 2,
+                        "borderColor": "#FFFFFF",
+                        "borderStyle": "solid"
+                    },
+                    "boxShadow": {
+                        "isEnabled": true,
+                        "xOffset": 0,
+                        "yOffset": 0,
+                        "blur": 20,
+                        "spread": 0,
+                        "color": "rgba(0, 0, 0, 0.12)",
+                        "inset": false
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 8,
+                            "unit": "px"
+                        }
+                    }
+                },
+                {
+                    "uuid": "b196253a-f3ca-4887-a20b-69011c0d0be7",
+                    "type": "subpage",
+                    "name": "Mode Nav",
+                    "cssClass": "subpage",
+                    "subpageName": "pages/shared/mode-nav.page",
+                    "inputParameters": {
+                        "focus": "None"
+                    },
+                    "width": {
+                        "width": {
+                            "value": 1228,
+                            "unit": "px"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "px"
+                        }
+                    },
+                    "background": {
+                        "color": "#FFFFFF"
+                    },
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 20,
+                        "borderWidth": 2,
+                        "borderColor": "#FFFFFF",
+                        "borderStyle": "solid"
+                    },
+                    "boxShadow": {
+                        "isEnabled": true,
+                        "xOffset": 0,
+                        "yOffset": 0,
+                        "blur": 20,
+                        "spread": 0,
+                        "color": "rgba(0, 0, 0, 0.12)",
+                        "inset": false
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 4,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 104,
+                "unit": "px",
+                "manualMode": true
+            }
+        }
+    ]
+}

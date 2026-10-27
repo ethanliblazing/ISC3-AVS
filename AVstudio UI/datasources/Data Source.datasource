@@ -1,0 +1,12 @@
+{
+  "localJson": "",
+  "urlPostfix": "",
+  "formatterFunction": "",
+  "isImagePreloadSource": false,
+  "wsConnectorUid": null,
+  "wsMessagePath": null,
+  "webConnectorUid": null,
+  "mqttConnectorUid": null,
+  "mqttTopic": null,
+  "pollingInterval": null
+}

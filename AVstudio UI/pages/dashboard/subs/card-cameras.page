@@ -1,0 +1,129 @@
+{
+    "uuid": "33b57a8a-3e36-426c-835a-09d34eff2ce6",
+    "name": "card-cameras",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 16,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 24,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "f8d8d8f4-6793-4236-8cf2-551476d7d3b2",
+            "name": "Cameras Title",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "c12673fa-0686-493f-b4e5-bd414c755692",
+                    "type": "text",
+                    "name": "Cameras Title",
+                    "cssClass": "text",
+                    "text": "<p>Cameras</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56"
+                },
+                {
+                    "uuid": "1409729b-62ff-423d-9fa3-b094e7bbf0f9",
+                    "type": "button",
+                    "name": "Open Cameras",
+                    "cssClass": "button isc-press-icon",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_arrow_forward_ios.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 24,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "size": {
+                "value": 36,
+                "unit": "px",
+                "manualMode": true
+            },
+            "paddingOptions": {}
+        },
+        {
+            "uuid": "b31e5b34-9f86-4125-bad6-e1adf3d639cf",
+            "name": "Live Feed",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "95a0d160-221c-4d16-9cf7-55f33abb2486",
+                    "type": "image",
+                    "name": "Live Feed",
+                    "cssClass": "image isc-press-icon",
+                    "variant": "simple",
+                    "imgPath": "assets/images/dash_camera_feed.jpg",
+                    "useExternalUrl": false,
+                    "externalUrl": "",
+                    "isLazyLoad": false,
+                    "fillType": "cover",
+                    "fillAlignX": "center",
+                    "fillAlignY": "center",
+                    "opacity": 100,
+                    "border": {
+                        "useBorder": true,
+                        "borderRadius": 6,
+                        "borderWidth": 3,
+                        "borderColor": "rgba(114, 114, 114, 0.1)",
+                        "borderStyle": "solid"
+                    },
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

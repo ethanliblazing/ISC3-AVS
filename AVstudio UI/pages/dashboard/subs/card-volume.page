@@ -1,0 +1,284 @@
+{
+    "uuid": "a92a73ac-f45c-4c4c-9652-bf1cae49f33a",
+    "name": "card-volume",
+    "layout": "responsive",
+    "cssClass": "page",
+    "flow": "column",
+    "gap": {
+        "value": 0,
+        "unit": "px"
+    },
+    "paddingOptions": {
+        "padding": {
+            "value": 24,
+            "unit": "px"
+        }
+    },
+    "background": {
+        "color": "transparent"
+    },
+    "containers": [
+        {
+            "uuid": "fc55f242-3742-444d-a685-aece27eebaca",
+            "name": "Volume Title",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "space-between",
+            "elements": [
+                {
+                    "uuid": "57d0ec1c-f55d-4a47-9ca4-39cdebaccc11",
+                    "type": "text",
+                    "name": "Volume Title",
+                    "cssClass": "text",
+                    "text": "<p>Volume</p>",
+                    "fontSize": {
+                        "value": 32,
+                        "unit": "px"
+                    },
+                    "textColor": "#4F4F56"
+                },
+                {
+                    "uuid": "638188c4-53ae-4704-96b4-a0822b5a43bd",
+                    "type": "button",
+                    "name": "Mute",
+                    "cssClass": "button isc-press-circle isc-press-mute",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_no_sound.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "uuid": "1a6632e8-d1e8-49ec-be95-16b24b533160",
+                            "name": "Mute",
+                            "behaviour": "onPress",
+                            "type": "v",
+                            "attachedVariableName": "audioMuted",
+                            "value": "true"
+                        }
+                    ],
+                    "activeModeIndex": "$audioMuted$",
+                    "modes": [
+                        {
+                            "name": "Muted",
+                            "isModeHasOwnActions": true,
+                            "modeProps": {
+                                "iconImageData": {
+                                    "imgPath": "assets/images/dash_no_sound_muted.svg",
+                                    "useExternalUrl": false,
+                                    "externalUrl": "",
+                                    "fillType": "contain",
+                                    "fillAlignX": "center",
+                                    "fillAlignY": "center",
+                                    "isLazyLoad": false
+                                },
+                                "actions": [
+                                    {
+                                        "uuid": "1952fab3-28e5-489e-9d27-85760b9421da",
+                                        "name": "Unmute",
+                                        "behaviour": "onPress",
+                                        "type": "v",
+                                        "attachedVariableName": "audioMuted",
+                                        "value": "false"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "size": {
+                "value": 40,
+                "unit": "px",
+                "manualMode": true
+            }
+        },
+        {
+            "uuid": "118346c7-9354-48b4-80ec-d314d3184999",
+            "name": "Volume Spacer",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "stretch",
+            "distribution": "flex-start",
+            "elements": []
+        },
+        {
+            "uuid": "17686f7b-f05e-4d4c-abc3-aeb725c1483e",
+            "name": "Volume Bar",
+            "cssClass": "container",
+            "flow": "row",
+            "align": "center",
+            "distribution": "flex-start",
+            "elements": [
+                {
+                    "uuid": "cfcc821b-a7c0-442f-9369-5c5b241d999e",
+                    "type": "button",
+                    "name": "Volume Down",
+                    "cssClass": "button isc-press-circle",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_remove.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                },
+                {
+                    "uuid": "f74586ee-a824-4ad9-931c-541af18b7c9d",
+                    "type": "slider",
+                    "name": "Volume",
+                    "cssClass": "sliderElement",
+                    "variant": "simple",
+                    "isVertical": false,
+                    "reverse": false,
+                    "thumbWidth": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "thumbHeight": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "trackSize": {
+                        "value": 16,
+                        "unit": "px"
+                    },
+                    "trackBackground": "#E4E4E9",
+                    "progressStartColor": "#629BFC",
+                    "progressEndColor": "#629BFC",
+                    "valueTooltipVisibility": "hidden",
+                    "minValue": 0,
+                    "maxValue": 100,
+                    "step": 1,
+                    "directValue1": "$audioVolume$",
+                    "actions": [
+                        {
+                            "uuid": "ad62248f-5120-488b-b40c-03f2c43cc4c5",
+                            "name": "Set audioVolume",
+                            "behaviour": "onChange",
+                            "type": "v",
+                            "attachedVariableName": "audioVolume",
+                            "value": "",
+                            "onChangeActionUseCustomValue": true
+                        }
+                    ],
+                    "activeModeIndex": "$audioMuted$",
+                    "modes": [
+                        {
+                            "name": "Muted",
+                            "isModeHasOwnActions": false,
+                            "modeProps": {
+                                "trackBackground": "#89898D",
+                                "progressStartColor": "#89898D",
+                                "progressEndColor": "#89898D"
+                            }
+                        }
+                    ],
+                    "width": {
+                        "width": {
+                            "value": 100,
+                            "unit": "%"
+                        }
+                    },
+                    "height": {
+                        "height": {
+                            "value": 16,
+                            "unit": "px"
+                        }
+                    }
+                },
+                {
+                    "uuid": "53b63e66-f1e5-4a9f-8efc-287ebe088698",
+                    "type": "button",
+                    "name": "Volume Up",
+                    "cssClass": "button isc-press-circle",
+                    "text": "",
+                    "gap": {
+                        "value": 0,
+                        "unit": "px"
+                    },
+                    "useImageAsIcon": true,
+                    "iconImageData": {
+                        "imgPath": "assets/images/dash_add.svg",
+                        "useExternalUrl": false,
+                        "externalUrl": "",
+                        "fillType": "contain",
+                        "fillAlignX": "center",
+                        "fillAlignY": "center",
+                        "isLazyLoad": false
+                    },
+                    "iconSize": {
+                        "value": 40,
+                        "unit": "px"
+                    },
+                    "iconPosition": "left",
+                    "background": {
+                        "color": "transparent"
+                    },
+                    "paddingOptions": {
+                        "padding": {
+                            "value": 0,
+                            "unit": "px"
+                        }
+                    }
+                }
+            ],
+            "gap": {
+                "value": 24,
+                "unit": "px"
+            },
+            "size": {
+                "value": 40,
+                "unit": "px",
+                "manualMode": true
+            }
+        }
+    ]
+}
