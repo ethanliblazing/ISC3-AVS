@@ -33,6 +33,10 @@ reference must exactly match the created file `connectors/<name>.<ext>`.
 }
 ```
 
+`password` fields are rendered as masked inputs with a copy-to-clipboard button
+next to them (the raw value is copied; an attached `@env:KEY@` token copies the
+token).
+
 Type-specific extras:
 
 ## `.web` (WebConnector)
@@ -43,6 +47,14 @@ Type-specific extras:
 ```
 
 Template default: `{ "type": "web", "host": "", "headers": [] }`.
+
+`host` and every header `key`/`value` accept `@env:KEY@` tokens (06 §Env tokens) —
+the only dynamic source offered by the picker on this form. Connector configs are
+consumed by drivers straight from the store, so the tokens resolve when a driver
+starts, against the active env values (the production build uses the file picked at
+build time); switching env in Live restarts the affected drivers. Header rows with an empty or malformed key (e.g. a blank
+"Add header" row, or an unresolved token used as the key) are skipped by the driver
+with a warning and flagged by the health check — they never break the whole fetch.
 
 ## `.websocket` (WebsocketConnector)
 
@@ -59,6 +71,12 @@ to datasources / variables / parameters is configured on the consumer side via a
 path (08 §WebSocket datasources, 06 §externalBinding). Sending is a `ws` action (05).
 Full end-to-end guide: `references/14-websockets.md`.
 
+Every field accepts `@env:KEY@` tokens (06 §Env tokens) — the picker offers env as
+the only dynamic source on this form. `isSecure` is a True/False select; env values
+`true`/`false` are type-inferred to booleans, so `@env:` tokens on `isSecure` resolve
+to a real boolean when a driver starts. Connector configs resolve the same way as the
+`.web` connector.
+
 ## `.mqtt` (MqttConnector)
 
 ```jsonc
@@ -66,6 +84,12 @@ Full end-to-end guide: `references/14-websockets.md`.
   "reconnectTimeout": 5000, "keepaliveTimeout": 60,   // seconds for keepalive!
   "path": "", "username": "", "password": "" }
 ```
+
+Every field accepts `@env:KEY@` tokens (06 §Env tokens) — the picker offers env as
+the only dynamic source on this form. `isSecure` is a True/False select; env values
+`true`/`false` are type-inferred to booleans, so `@env:` tokens on `isSecure` resolve
+to a real boolean when a driver starts. Connector configs resolve the same way as the
+`.web` connector.
 
 ## `.crestron` (CrestronConnector)
 
@@ -80,6 +104,11 @@ Full end-to-end guide: `references/14-websockets.md`.
       "connected_signal_d_fb": ""             // digital FB: connection state
   } }
 ```
+
+`host`, `ipId`, `roomId` and `authToken` accept `@env:KEY@` tokens (06 §Env tokens) —
+the picker offers env as the only dynamic source on these fields; the `globalJoins`
+join fields do not take dynamic values. Connector configs resolve at driver start
+against the active env values (same as the `.web` connector).
 
 `ipId`, `roomId`, `authToken` may be `null`. `globalJoins` is REQUIRED (may hold empty
 strings / nulls). Example observed:
@@ -107,6 +136,13 @@ strings / nulls). Example observed:
 into the auth token; `username`/`password` are the AMX credentials. All four are
 optional (empty strings in the template).
 
+Every field accepts `@env:KEY@` tokens (06 §Env tokens) — the picker offers env as
+the only dynamic source on this form (`key` included, though a PEM body does not fit
+a single dotenv line — prefer host/port/credentials in env). `isSecure` is a
+True/False select; env values `true`/`false` are type-inferred to booleans, so
+`@env:` tokens on `isSecure` resolve to a real boolean when a driver starts. Connector
+configs resolve the same way as the `.web` connector.
+
 In live mode the connector opens a WebSocket to
 `ws(s)://<host>:<port>/web/ui/<room>/ws?token=<token>` (`port` defaults to `8080`;
 `isSecure` selects `wss`). The token is `base64(JSON { username, password })` with
@@ -132,6 +168,12 @@ Template default: `{ "type": "amx", "host": "", "port": "", "room": "", "key": "
 `knxDatapointId` + `knxFormat` (see 05); variables bind via `externalBinding`
 `{ kind: "knx", datapointId, format }` (see 06).
 
+Every field accepts `@env:KEY@` tokens (06 §Env tokens) — the picker offers env as
+the only dynamic source on this form. `isSecure` is a True/False select; env values
+`true`/`false` are type-inferred to booleans, so `@env:` tokens on `isSecure` resolve
+to a real boolean when a driver starts. Connector configs resolve the same way as the
+`.web` connector.
+
 ## `.doorbird` (DoorbirdConnector — DoorBird / BirdGuard LAN-2-LAN API)
 
 One file = one device. For two doors create two files
@@ -149,6 +191,12 @@ DoorBird App credentials (first 6 chars of username = device ID). `port` is
 optional — empty means auto (80 for http, 443 for https). The relay to trigger
 (`open-door.cgi?r=`, `"1"` | `"2"` | `"<controllerID>@<relay>"`) is chosen per
 button/widget, not in the connector; the available relays come from `info.cgi`
+
+Every field accepts `@env:KEY@` tokens (06 §Env tokens) — the picker offers env as
+the only dynamic source on this form. `isSecure` is a True/False select; env values
+`true`/`false` are type-inferred to booleans, so `@env:` tokens on `isSecure` resolve
+to a real boolean when a driver starts. Connector configs resolve the same way as the
+`.web` connector.
 `RELAYS`. API limits: max 1 conn/sec per device, 423 on wrong-auth
 flood, 503 when the line is busy, 204 when the user has no live-view permission.
 

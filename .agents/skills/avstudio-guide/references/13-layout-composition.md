@@ -141,7 +141,48 @@ Anti-patterns:
 - ❌ Omitting `cssClass` — every page/container/element carries it (defaults per
   rule 5).
 
-## 6. Anti-pattern checklist (what NOT to do)
+## 6. Motion — entrance animations (optional)
+
+AV Studio has four independent motion layers, and they all fire on **the same moment** —
+the entry of a page (first render and every page switch):
+
+| Layer | What animates | Where it is configured | Use it when |
+| :--- | :--- | :--- | :--- |
+| Page transition | the whole page content slot (old page vs new page) | theme `page.transition*` keys — 15 | page navigation should feel fluid (built-in default) |
+| Container cascade | every element of one container, one after another | container `childAnimate` + `childAnimateDelay` — 02 §Nested element entrance animation | a region / dashboard should "build up" on entry |
+| Element reveal | one element | element `animate` — 03 §Entrance animation | a single widget should draw attention on arrival |
+| List items | every repeated item of a `subpageList` | `itemAnimate` + `itemAnimateDelay` — 04 §16 | a datasource-driven list should cascade in |
+
+**Pick one lead layer per screen.** Because all four start at the same moment, stacking
+them multiplies the motion (the page slides while its own elements also fade/slide in) —
+that reads as flicker, not polish. Usual choices:
+
+- page transition is already on (theme default) → add **nothing** else, or only a short
+  element/container reveal;
+- "dashboard build-up" screen → turn the **container cascade** on and leave element
+  `animate` off (the container preset already covers its elements);
+- one hero widget → element `animate` only.
+
+Rules that keep motion predictable:
+
+- Element/container/list reveals are fixed at `300ms` with a `24px` slide distance (no
+  duration/easing prop in the data model) — override via CSS only when the user explicitly
+  asks for different timing (03 §Entrance animation).
+- Stagger cascades are always capped at a 1.5s total spread: the step compresses
+  automatically for long lists/containers — never hand-compute per-item delays.
+- A `subpageList` inside a cascading container is **one child** of the cascade; its items
+  run their own timeline — don't combine both on the same list.
+- Entrance animations are one-shot: they replay on a fresh render (first load, page
+  switch, `display: none` → shown) and when the preset itself changes.
+- The editor canvas does not animate (deliberate) — the user verifies motion in Live
+  preview or a production build, never in the editor.
+- `prefers-reduced-motion: reduce` turns off element/container/list reveals; page
+  transitions are **not** covered by that guard (15) — do not rely on the transition
+  alone to convey state.
+- Do not invent motion keys: the data model has no per-element duration, easing, loop or
+  exit/leave preset — the only timing knob is the stagger step.
+
+## 7. Anti-pattern checklist (what NOT to do)
 
 - ❌ `layout: "fixed"` everywhere, or fixed without a pixel design.
 - ❌ Absolute positioning props inside responsive pages.
@@ -158,9 +199,11 @@ Anti-patterns:
 - ❌ Custom CSS for what the theme provides; whole-type restyles via css classes.
 - ❌ Page-folder CSS (`pages/<dir>/*.css`) created proactively or offered unprompted —
   only on explicit user request (rule 5a).
+- ❌ Stacking a page transition + container cascade + element reveals on the same entry
+  moment (§6) — pick one lead motion layer.
 - ❌ Invented keys, invalid units, missing uuids (rules 1–3, 18).
 
-## 7. Page-building recipe (step by step)
+## 8. Page-building recipe (step by step)
 
 1. **Regions**: derive the page's bands/columns from the request; sketch them
    explicitly (e.g. "top bar / content column / right status panel").
@@ -175,6 +218,8 @@ Anti-patterns:
    `global.slots`.
 6. **Styling**: theme keys/vars for look-and-feel; `cssClass`+`globalStyles.css` only for
    genuine one-offs.
-7. **Validate**: `uuid` on every entity (rule 2), keys verbatim from schemas (rule 1),
+7. **Motion (optional)**: if the user asks for it, pick **one** lead layer — page
+   transition, container cascade or element reveal (§6); never stack them.
+8. **Validate**: `uuid` on every entity (rule 2), keys verbatim from schemas (rule 1),
    supported units (rule 3), page references per rule 6 (relative refs only inside the
    page's folder, `subpageName` only).

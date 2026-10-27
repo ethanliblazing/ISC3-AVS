@@ -1,6 +1,6 @@
 ---
 name: avstudio-guide
-description: Authoritative reference for creating and editing AV Studio project entities — pages (.page), containers, elements, actions, variables, parameters, connectors, datasources, functions, avstudio.config. Trigger whenever you are asked to create, edit, extend, or restructure a page, arrange elements in a grid, size or lay out containers in a responsive page (rails vs elastic, container `size`/`manualMode`), wire actions to elements/pages/variables, build a repeated/datasource-driven subpage list (`subpageList` — boxless or grid, scroll), bind a datasource to an element (`attachedDatasource`) and use dynamic `$`/`%`/`#datasource:path#` tokens, or ensure a JSON payload stays within the AV Studio data model. Never invent properties, values, units, or file layout rules beyond what these references define. Also trigger for questions about avstudio.config options (log level / console verbosity, theme, start page) and how to change them, for animating the page-switch transition (View Transitions API, theme `page` transition keys), for attaching a live MJPEG / stream preview (Roku, Fire Stick, IP camera) to a page, for wiring a WebSocket connector (receive JSON into a datasource / variable / parameter, or send a message via a `ws` action), and for MCP connection setup (connecting AI agents to AV Studio).
+description: Authoritative reference for creating and editing AV Studio project entities — pages (.page), containers, elements, actions, variables, parameters, connectors, datasources, functions, avstudio.config. Trigger whenever you are asked to create, edit, extend, or restructure a page, arrange elements in a grid, size or lay out containers in a responsive page (rails vs elastic, container `size`/`manualMode`), wire actions to elements/pages/variables, build a repeated/datasource-driven subpage list (`subpageList` — boxless or grid, scroll), bind a datasource to an element (`attachedDatasource`) and use dynamic `$`/`%`/`#datasource:path#` tokens, consume a subpageList's per-item context (`avstudio_listItemKey` / `avstudio_listItemIsSelected`) inside the item page, or ensure a JSON payload stays within the AV Studio data model. Never invent properties, values, units, or file layout rules beyond what these references define. Also trigger for questions about avstudio.config options (log level / console verbosity, theme, start page) and how to change them, for animating the page-switch transition (View Transitions API, theme `page` transition keys) and for entrance (reveal) animations — an element's `animate`, a container's staggered `childAnimate`/`childAnimateDelay` cascade, a subpageList's `itemAnimate`/`itemAnimateDelay`, or choosing which motion layer fits a screen, for attaching a live MJPEG / stream preview (Roku, Fire Stick, IP camera) to a page, for wiring a WebSocket connector (receive JSON into a datasource / variable / parameter, or send a message via a `ws` action), and for MCP connection setup (connecting AI agents to AV Studio).
 ---
 
 # AV Studio Project Entities — Authoritative Data Model
@@ -18,6 +18,10 @@ Trigger on ANY of these tasks:
 
 - Create a new `.page` file, or edit an existing page / container / element.
 - Build an element grid: choose containers, flex flow/align/distribution, or fixed positioning.
+- Integrate an **external HTML component** as a `customElement` (analyze the component,
+  agree on its states/events, write its `manifest.json`) — use the
+  **`avstudio-custom-element`** skill for that workflow; this guide holds the data
+  model (reference 04 §17).
 - Attach a **live preview / MJPEG stream** (Roku / Fire Stick / IP camera) to a page.
 - Add or edit **actions**: on elements, on pages (`onLoad`/`onExit`), on variables and page
   parameters (`onChange`).
@@ -69,8 +73,8 @@ project-root/
     - Actions written by the editor use the key `uuid` (the internal type name is `uid`) —
       preserve whatever key form the file already uses; default to `uuid` for new files.
 5. **CSS classes** — every page/container/element carries `cssClass`. Defaults:
-   `page`, `container`, `button`, `text`, `image`, `subpage`, `subpageList`, `spacerElement`,
-   `sliderElement`, `dpadElement`, `stateControlElement`, `shadesCompactElement`,
+   `page`, `container`, `button`, `text`, `image`, `subpage`, `subpageList`, `customElement`,
+   `spacerElement`, `sliderElement`, `dpadElement`, `stateControlElement`,
    `videoElement`, `inputElement`, `dateTimeElement`, `rgbPickerElement`,
    `roundSliderElement`, `autonomicElement`. Custom classes may be styled in the active
    theme's companion `globalStyles.css` (a sibling of the active `.theme`; create it if
@@ -155,6 +159,18 @@ project-root/
     including `.datasource`, e.g. `#datasources/rooms.datasource:rooms.0.name#`); inside a
     `subpageList` instance `#key:*.<path>#` reads the **current list item** (`*` = this
     instance's array item, resolving only when `key` matches the list's datasource).
+    **List context** — a `subpageList` also injects a per-item context into its item
+    pages through two **reserved page-parameter names**: `avstudio_listItemKey` (string —
+    the item's
+    key: the list's List Key setting resolved against that item, or the item index when
+    unset) and `avstudio_listItemIsSelected` (boolean — true on the item whose key matches the
+    list's `activeSelectedListKey`). Configure the pair on the Subpage List element
+    (its List Key / List Selected Key fields); consume inside the item page as
+    `%avstudio_listItemKey%` /
+    `%avstudio_listItemIsSelected%`. The names are reserved and implicit on every page — the
+    create form rejects them (the whole `avstudio_` prefix is reserved), and Default
+    value / External value setter stay
+    list-owned. Details: 04 §16, 06 §List context parameters.
     Never invent datasource keys or field paths; datasource tokens are render-property
     only, like `$`/`%`. Full syntax: 06 §Datasource tokens, §Item-relative datasource
     tokens. **External feedback tokens** are a fourth family: `!system:key=value!` binds a
@@ -174,6 +190,15 @@ project-root/
     (string, `hex` variant). Numeric keys may stand as bare JSON values
     (`{"r": @context:red@}`), string keys must be quoted. Resolved at action time, never
     at render; full list: 05.
+    **Env tokens** are a sixth family: `@env:KEY@` reads a value from the project's
+    **active env file** (`env/*.env` dotenv files — 00 §`env/`). Use them for
+    per-deployment constants (hosts, ports, URLs, keys) so one project ships to several
+    environments without editing content: `"host": "@env:HOST@"`. The active file is the
+    status-bar selection for the editor/Live Preview, or the file picked at build time
+    for production; keys are `[A-Za-z0-9_]{1,64}` and values are type-inferred
+    (`true`/`false`, JSON-style numbers). Env tokens resolve last in the render
+    pipeline and also inside `avstudio.config` values; an unknown key stays literal
+    (flagged by the health check). Full syntax: 06 §Env tokens.
     Rich text additionally supports cached toolbar tags: variable tags
     (`<varString variableName="x">Fallback</varString>` / `<varNumber variableName="x"/>` /
     `<varBoolean variableName="x" true="True" false="False"/>`, global variables only),
@@ -238,8 +263,8 @@ project-root/
     `backgroundColor` (never `background-color`), `borderRadius` (never `border-radius`),
     `scrollMode` (never `scroll-mode`), `scrollSnap`/`scrollSnapAlign`,
     `manualMode`, `scrollbarThumbBackground`.
-    Keep snake_case where the schema mandates it (`input_signal_s_fb`,
-    `value_signal_a`, `attachedFunctionToRun`). Where an alias exists (`textFontSize` on
+    Keep snake_case where the schema mandates it (`input_direct_value`,
+    `value_direct`, `attachedFunctionToRun`). Where an alias exists (`textFontSize` on
     elements vs `fontSize`), use the key documented for that entity. When in doubt,
     re-read the schema block — do not guess.
 19. **Live MJPEG previews are `image` elements with `variant: "stream"` — nothing else.**
@@ -320,6 +345,8 @@ project-root/
 | Repeated / datasource-driven subpage list (boxless vs grid, rows/columns/gridFlow, scroll)           | `references/04-elements-catalog.md` §16, `references/06-variables-and-parameters.md` §Item-relative datasource tokens                 |
 | JS functions, CSS classes, assets, themes                                                            | `references/09-functions-and-assets.md`                                                                                               |
 | Page-switch transition animation (View Transitions, theme `page` transition keys)                    | `references/15-page-transitions.md`                                                                                                   |
+| Entrance (reveal) animation — element `animate`, container `childAnimate` cascade, subpageList items | `references/03-elements-common.md` §Entrance animation, `references/02-containers.md` §Nested element entrance animation, `references/04-elements-catalog.md` §16 |
+| Which motion layer to use / combining page transition with reveals and cascades                       | `references/13-layout-composition.md` §Motion — entrance animations                                                                   |
 | Launch Live Preview / run editor commands (agent + user)                                             | `references/10-editor-commands.md`                                                                                                    |
 | MCP setup (connect AI agent to AV Studio)                                                            | Inline — workflow I below                                                                                                             |
 
@@ -375,7 +402,7 @@ project-root/
    `zIndex`); in fixed pages use positioning props from `references/03-elements-common.md`.
 5. Actions: `actions: [...]` — see `references/05-actions.md`.
 6. Type-specific props: include them per `references/04-elements-catalog.md`
-   (e.g. slider `minValue/maxValue/step`, input `input_signal_s_fb`, subpage `subpageName`).
+   (e.g. slider `minValue/maxValue/step`, input `input_direct_value`, subpage `subpageName`).
 
 ### C. Build a container grid
 
@@ -576,8 +603,9 @@ feeds, any `multipart/x-mixed-replace` HTTP endpoint (rule 19).
   "distribution": "flex-start" | "flex-end" | "center" | "space-between" | "space-around",
    "gap": { "value": 10, "unit": "px" },
    "size": { "value": 64, "unit": "px", "manualMode": true },  // exact size only with manualMode: true (rail); otherwise size is ignored — container stays elastic (rule 20)
-  "paddingOptions": { /* Padding */ }, "border": { /* Border */ }, "background": { /* Background */ },
+   "paddingOptions": { /* Padding */ }, "border": { /* Border */ }, "background": { /* Background */ },
   "scrollMode": "scroll", "scrollSnap": false, "scrollSnapAlign": "start", "scrollbarThumbBackground": "auto",
+  "childAnimate": "fade", "childAnimateDelay": 60,  // nested elements: reveal preset + stagger step (ms)
   "textColor": "#ffffff"
 }
 
@@ -594,7 +622,8 @@ feeds, any `multipart/x-mixed-replace` HTTP endpoint (rule 19).
   "zIndex": 1, "order": 1, "gap": { "value": 8, "unit": "px" },
   "paddingOptions": { /* Padding */ }, "border": { /* Border */ }, "background": { /* Background */ },
   "boxShadow": { "color": "black", "blur": 50 }, "boxReflect": { "position": "bottom", "offset": 1, "startOpacity": 80, "endOpacity": 0 },
-  "actions": [ /* Action[] */ ], "modes": [ /* Mode[] */ ], "isWidget": false, "cssClass": "button"
+  "actions": [ /* Action[] */ ], "modes": [ /* Mode[] */ ], "isWidget": false, "cssClass": "button",
+  "animate": "fade"   // entrance (reveal) preset — 03 §Entrance animation; unset/none = no animation
 }
 ```
 

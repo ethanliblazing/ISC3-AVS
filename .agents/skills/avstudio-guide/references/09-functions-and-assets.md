@@ -22,8 +22,61 @@ Rules:
   via `formatValueFunctionUid` — those uids are editor-generated; when creating a
   function file, name it meaningfully (`logger.js`, `utils/5515.js`), and reference the
   file's relative path where the schema expects a uid string.
+- Function files created by the editor's **Add function** command end with a commented
+  `window.avstudio` API hint block (the same examples as §Runtime API below). It is
+  comments only — safe to keep as a cheat sheet or delete; the contract above is
+  unchanged, and the runtime compiler tolerates trailing comments.
 - Datasource formatters are the same shape, placed in `datasources/` next to the
   datasource file (see 08).
+
+## Runtime API (`window.avstudio`)
+
+Project functions run in the page window, so their code can call the runtime API on
+`window.avstudio` (never `window.avgatorStudio` — that legacy name does not exist in
+AV Studio NG):
+
+```js
+function go(data) {
+  window?.avstudio?.navigate("/additional/second.page");   // navigate by URL path
+  window?.avstudio?.navigateToPage("my page name");        // navigate by page name (the page's `name`, case-insensitive)
+  window?.avstudio?.publishAnalog({ signalName: "signalName", value: 1 });
+  window?.avstudio?.publishDigital({ signalName: "signalName", value: true });
+  window?.avstudio?.publishSerial({ signalName: "signalName", value: "value" });
+  const digital = window?.avstudio?.getInstantDigitalFb({ signalName: "signalName", defaultValue: false });
+  const analog = window?.avstudio?.getInstantAnalogFb({ signalName: "signalName", defaultValue: 0 });
+  const serial = window?.avstudio?.getInstantSerialFb({ signalName: "signalName", defaultValue: "text" });
+  const all = window?.avstudio?.getDatasource({});                       // all datasources
+  const one = window?.avstudio?.getDatasource({ path: "datasources/rooms/rooms.datasource" }); // by datasource path
+  const value = window?.avstudio?.getVariableByName({ name: "variableName" });
+  window?.avstudio?.setVariableByName({ name: "variableName", value: "newValue" });
+  return data;
+}
+```
+
+Semantics:
+
+- **Availability** — installed by the runtime boot: live preview and production builds.
+  In the editor canvas the object is absent (functions do not run there anyway); code
+  should keep the `window?.avstudio?.…` optional-chaining style everywhere.
+- **Navigation** — `navigate` accepts a URL path (`/x.page`, nested paths fine);
+  `navigateToPage` matches the page's `name` field case-insensitively and warns when no
+  page matches. Both drive the same hash router the page-flip action uses (05).
+- **Publish** — routed through the connector drivers exactly like publish actions (05);
+  a missing/unstarted connector logs and drops the write.
+- **Instant feedback** — synchronous reads of the live control-system state cache (same
+  getter the render pipeline uses). No live connector or unread signal → the
+  `defaultValue` is returned.
+- **Datasources** — returns the resolved datasource data (what `#key:path#` tokens
+  read, 06 §Datasource tokens). Without `path`: a record keyed by datasource path. With
+  `path`: the resolved data of that datasource; not found → `undefined`.
+- **Variables** — `getVariableByName` returns the current value, or the default until
+  the variable has been written (same convention as `$name$` tokens, 06); writes go
+  through the same store action variable actions use.
+
+Custom elements (`04 §17`) run in an iframe: the injected bridge exposes the same
+`window.avstudio` surface inside the frame by delegating to the host page, so the
+examples above work unchanged in custom-element code. There is no legacy
+`setStoreValue`/`getStoreValue`/`audioControl` — variables cover persistent values.
 
 ## CSS (style layers)
 
@@ -150,7 +203,7 @@ theme — the built-in defaults apply. The editor ships
 pre-selects it.
 
 The `.theme` file mirrors the theme schema exactly — five sections:
-`project`, `page`, `container`, `overlay`, `element.<type>` (16 element types).
+`project`, `page`, `container`, `overlay`, `element.<type>` (17 element types).
 Values are plain CSS strings. The complete canonical key inventory is below.
 
 ### Theme key inventory (`avstudio-theme-inventory`)
@@ -164,10 +217,10 @@ renamed or broken, this inventory is the source; recreate the file via the
 ```jsonc avstudio-theme-inventory
 {
     "project": ["textColor", "brandColor", "fontSize", "fontFamily", "backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundImageBlur", "gap", "borderRadius"],
-    "page": ["gap", "fontSize", "fontFamily", "textColor", "brandColor", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius", "borderColor", "backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "flow", "align", "responsiveWidth", "responsiveHeight", "fixedWidth", "fixedHeight", "transitionEnter", "transitionExit", "transitionDuration", "transitionEasing"],
-    "container": ["gap", "size", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderColor", "scrollMode", "scrollbarThumbBackground", "flow", "align", "distribution", "fontFamily", "fontSize", "textColor", "brandColor", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius"],
+    "page": ["gap", "fontSize", "fontFamily", "textColor", "brandColor", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius", "borderColor", "backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "backgroundTransition", "flow", "align", "responsiveWidth", "responsiveHeight", "fixedWidth", "fixedHeight", "transitionEnter", "transitionExit", "transitionDuration", "transitionEasing"],
+    "container": ["gap", "size", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "backgroundTransition", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderColor", "scrollMode", "scrollbarThumbBackground", "flow", "align", "distribution", "fontFamily", "fontSize", "textColor", "brandColor", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius"],
     "overlay": ["maskColor", "maskOpacity", "maskBlur", "backgroundColor", "closeButtonColor", "closeButtonSize", "closeButtonOffset"],
-    "elementBase": ["backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius", "borderColor"],
+    "elementBase": ["backgroundColor", "backgroundImage", "backgroundImageOpacity", "backgroundGradient", "backgroundGradientOpacity", "backgroundImageBlur", "backgroundElementsBlur", "backgroundTransition", "borderStyle", "borderWidth", "borderTopWidth", "borderBottomWidth", "borderLeftWidth", "borderRightWidth", "borderRadius", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomRightRadius", "borderBottomLeftRadius", "borderColor"],
     "elementExtras": {
         "button": ["fontSize", "fontFamily", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "textTransform", "textColor", "gap", "iconSize", "iconColor", "pressedBackgroundColor", "pressedTextColor", "pressedIconColor", "pressedBorderColor", "pressedBorderWidth", "pressedBackgroundImage", "pressedBackgroundImageOpacity", "pressedBackgroundImageBlur", "pressedBackgroundElementsBlur", "pressedBackgroundGradient", "pressedBackgroundGradientOpacity", "disabledOpacity", "disabledFilter"],
         "text": ["fontSize", "fontFamily", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "textTransform", "textColor", "gap", "iconSize", "iconColor"],
@@ -184,7 +237,8 @@ renamed or broken, this inventory is the source; recreate the file via the
         "rgbPicker": [],
         "roundSlider": ["fontSize", "fontFamily", "textColor", "textTransform", "startColor", "endColor", "defaultTrackColor", "handleColor"],
         "subpage": ["fontSize", "fontFamily", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "textColor"],
-        "subpageList": ["fontSize", "fontFamily", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "textColor", "rows", "columns", "gridFlow", "gap", "scrollMode", "scrollbarThumbBackground"]
+        "subpageList": ["fontSize", "fontFamily", "padding", "paddingTop", "paddingBottom", "paddingLeft", "paddingRight", "textColor", "rows", "columns", "gridFlow", "gap", "scrollMode", "scrollbarThumbBackground"],
+        "customElement": []
     }
 }
 ```

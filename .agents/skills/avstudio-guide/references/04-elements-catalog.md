@@ -340,10 +340,7 @@ Template defaults: `variant: "switch"`, `text: "State Control Label"`, `textOn: 
   "autofocus": false,
   "displayAsPassword": false,
   "displayAsNumber": false,
-  "input_signal_s_fb": "",        // reserved: serial FB signal name (not yet rendered)
-  "input_direct_value": "",       // text shown/edited — literal or dynamic token
-  "activeValueStateSource": "crestron" | "direct",  // reserved (not yet rendered)
-  "makeInFocus_signal_d": ""      // digital signal to focus the field
+  "input_direct_value": ""        // text shown/edited — literal or dynamic token
 }
 // + Font props
 ```
@@ -539,8 +536,7 @@ size `200×200px`.
   "type": "roundSlider",
   "variant": "round" | "horseshoe" | "half-top" | "half-bottom" | "half-left" | "half-right",
   "reverse": false,
-  "value_signal_a": "",        // analog signal name for the value
-  "value_direct": 50,          // direct value when no signal bound
+  "value_direct": 50,          // current value — number or dynamic token (e.g. analog feedback) resolved at render time
   "minValue": 0, "maxValue": 100, "valueStep": 1,
   "startColor": "#00ff00", "endColor": "#00aaff",   // track gradient
   "defaultTrackColor": "#555555",
@@ -556,6 +552,12 @@ size `200×200px`.
 Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueStep: 1`,
 `value_direct: 50`, `trackSize: 25`, `handleSize: 28`, `text: "Content"`, size
 `200×200px`.
+
+Incoming value — `value_direct` is the value the control shows. It may be a literal
+number or a dynamic token (`$var$` / `%param%` / `!system:...!` analog feedback)
+resolved at render time like other props; an unresolved token falls back to `minValue`
+in the editor. Dragging the handle commits the new value to `value_direct` (live) and
+fires the element's analog actions (05).
 
 ## 15. `subpage` — cssClass `"subpage"`
 
@@ -605,6 +607,8 @@ Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueSte
         "roomId": "#datasources/rooms.datasource:*.id#", // item-relative (see below)
         "label": "$listLabel$",
     },
+    "listKey": "#datasources/rooms.datasource:*.name#", // per-item context key; unset → the item index ("0", "1", …)
+    "activeSelectedListKey": "Kitchen", // item whose resolved key equals this gets isSelected: true in its list context
     "attachedDatasource": {
         // REQUIRED to render instances — the list repeats this result
         "datasource": "datasources/rooms.datasource",
@@ -619,6 +623,8 @@ Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueSte
     "scrollSnapAlign": "start", // grid: "start" (default) | "center" | "end"; snap alignment of the cells, applies when scrollSnap is on
     "scrollbarThumbBackground": "auto", // grid: CSS color or "auto"; unset → theme --av-element-subpageList-scrollbarThumbBackground
     "gap": { "value": 8, "unit": "px" }, // inter-cell spacing (unset → theme default 0px)
+    "itemAnimate": "fade", // per-item entrance animation (same presets as the common `animate`); unset/none = no item animation
+    "itemAnimateDelay": 60, // stagger step in ms: item N starts at N × step (total spread capped at 1.5s); unset/0 = all items together
 }
 ```
 
@@ -636,6 +642,49 @@ Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueSte
   `%param%` / absolute `#<key>:<path>#` tokens work too; an item-relative token resolves
   only inside a matching list scope and stays literal elsewhere. Syntax: 06 §Tokens,
   §Datasource tokens.
+- **Per-item list context — `listKey` / `activeSelectedListKey`.** Every instance carries
+  a list context with a `key` and an `isSelected` flag. `key` = the `listKey` expression
+  resolved **against that item** (item-relative `#ds:*.field#` tokens work here too);
+  when `listKey` is unset — or its token does not resolve for an item — the key falls
+  back to the item's index (`"0"`, `"1"`, …). `isSelected` is `true` on the item whose
+  key equals the resolved `activeSelectedListKey` (string comparison, so `"1"` matches
+  `1`). Both are sidebar fields in the element's **Input Parameters** section and accept
+  dynamic tokens.
+- **Receiving the context — reserved parameter names.** The item subpage has page
+  parameters named **`avstudio_listItemKey`** (string) and/or
+  **`avstudio_listItemIsSelected`** (boolean) — implicit, no declaration needed — and
+  receives the per-item context through them: `%avstudio_listItemKey%` /
+  `%avstudio_listItemIsSelected%` work
+  like any parameter (props, rich-text `<parameter>`, actions). The list injects both
+  at the item boundary and **overrides** any stored `inputParameters` value for these
+  names (the list's sidebar shows those rows as read-only "Provided by the list
+  context"). The two names are **reserved everywhere** — whether a page is
+  used as an item cannot be judged statically (the `subpageName` target may be
+  a dynamic token) — so every page's parameters table pins them in a dedicated
+  footer section ("Subpage List context — values provided by the Subpage List
+  element", light-blue tint) below the declared parameters, column-aligned and
+  excluded from sorting and the name filter; the **actions editor is
+  available right on the row** — the first action edit materializes a real
+  declaration in the file (type is
+  fixed: string / boolean). The names cannot
+  be created as page parameters or global variables (the create form rejects
+  the whole `avstudio_` prefix). Default value and External value setter are hidden for these
+  reserved names — the list owns the value; the declared default is what a
+  standalone render shows, and the parameter's **side-effect actions react to
+  `avstudio_listItemIsSelected` flips in live runtime** (item becomes selected → its
+  onChange actions run). `avstudio_listItemKey` displays the **`any`** type tag — its
+  value may come from any datasource field and is stringified. Edge: an
+  injected key that resolves to an empty string is dropped — the
+  declared default stands.
+  The health check treats the reserved parameter tokens as always known, warns when a
+  stored `inputParameters` value explicitly sets these
+  names, and when any page declares them with an externalBinding.
+  The health check also warns when `listKey` holds no item-relative `#ds:*.field#` token
+  (a literal, `$var$`, `%param%` or absolute `#ds:path#` value resolves to ONE
+  list-level key shared by every instance, so `activeSelectedListKey` would match
+  them all at once), and when `activeSelectedListKey` itself carries an
+  item-relative token (it resolves at list level, outside any item scope, stays
+  literal and never matches an item key).
 - **Feedback in `inputParameters`.** A value may be a full external feedback token whose
   join is item-relative, e.g.
   `"volumeLevelPercent": "!crestron:type=number;name=#datasources/rooms.datasource:*.volume#!"`.
@@ -689,6 +738,70 @@ Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueSte
 - Background, border, shadow, reflection and padding apply to the **element box** (grid
   variant); `subpageName`/`inputParameters` follow the exact same ref/parameter rules as
   `subpage` (§15).
+- **Item entrance animation — `itemAnimate` + `itemAnimateDelay`.** Independent of the
+  common element `animate` (which animates the whole list box): `itemAnimate` plays the
+  same entrance presets on **each repeated instance** when it appears, and
+  `itemAnimateDelay` (ms) staggers them — item N starts at `N × itemAnimateDelay`, so the
+  list cascades in. The total cascade spread is **capped at 1.5s**:
+  `effective step = min(itemAnimateDelay, 1500 / itemCount)`, so long lists compress the
+  step automatically (100 items × 60ms would otherwise wait 6s). Unset/`0` = all items
+  animate together. Items animate when the list mounts (including when an async
+  datasource first resolves) and a later-appended item at position N plays with its
+  index-based delay. A `subpageList` inside a container with `childAnimate` counts as
+  **one container child** (it animates at its index delay) and its items cascade on top of
+  that — avoid combining both for the same list. The editor canvas does not animate
+  elements — check in the Live preview or a production build (03 §Entrance animation).
+
+## 17. `customElement` — cssClass `"customElement"`
+
+```jsonc
+{
+    "type": "customElement",
+    "customElementId": "3dmap", // folder name under elements/
+    "propValues": {             // values for the component's manifest props
+        "tvOn": "!crestron:type=digital;name=#7#!" // literal or any dynamic token
+    }
+}
+```
+
+- Renders a **static HTML document from the project** inside an iframe: the folder
+  `elements/<customElementId>/` must contain an HTML document — its root `index.html`
+  when present, otherwise the shallowest then alphabetically-first `*.html` in the
+  folder tree. The document loads its own sibling assets (js/css/models/…) relative to
+  itself; they are NOT part of the project's `assets/` system.
+- The injected bridge (`av-bridge.js`) exposes the runtime API inside the frame:
+  element scripts use `window?.avstudio?.…` exactly like project functions do
+  (09 §Runtime API) — the frame delegates to the host page, same-origin.
+- **Component contract — `manifest.json`.** A `manifest.json` next to the entry
+  document (format `avstudio-component/v1`) declares the component's integration:
+  `props` (values the host drives — rendered as sidebar controls, bindable to dynamic
+  tokens through `propValues`) and `events` (component gestures surfaced as actions —
+  bound through the change behaviours `beforeChange` / `onChange` / `afterChange` with
+  an `attachedEventName` referencing the manifest event). A universal bridge script is
+  injected into the document by the host; it interprets the manifest's DOM hook
+  strategies (attribute reads/writes, custom events, mutations) — the component code
+  itself needs no AVstudio knowledge. A missing or invalid manifest degrades the
+  element to a static frame (issues show in the sidebar); it never breaks rendering.
+- **State model (slider parity).** A bound prop follows its resolved remote value; an
+  unbound prop keeps the last value the component reported. A frame event updates the
+  linked prop optimistically, fires `beforeChange` (old value) → `onChange` (new
+  value) → `afterChange` (after the sync settles), and the binding round-trip closes
+  the loop — exactly like a slider's value + onChange.
+- The **box is a standard element**: `width`/`height`, `top`/`left`/constraints, full
+  `background` (color/image/gradient/video layers via the theme `element.customElement`
+  section), `border`, `boxShadow`, `boxReflect`, `padding` — everything applies to the
+  wrapper box; the iframe is transparent and fills the content area (the box
+  `borderRadius` clips it).
+- **Editor**: the iframe never captures pointer events — selection, dragging and click
+  actions stay on the box. A placeholder curtain is drawn when `customElementId` is
+  empty or the folder has no HTML document. In runtime the frame is interactive:
+  clicks inside it belong to the component (box-level click actions apply to the
+  padding area only).
+- **Template defaults**: size `300×200px`, `cssClass: "customElement"`.
+- **Discovery**: element folders are picked up automatically from `elements/` (00
+  §Project layout). Each folder appears as one entry in the "Custom Elements" section of
+  the Add Element picker (element type `customElement` with the folder preselected); the
+  element sidebar offers the same list to change the reference later.
 
 ## Element type summary
 
@@ -710,3 +823,4 @@ Template defaults: `variant: "round"`, `minValue: 0`, `maxValue: 100`, `valueSte
 | roundSlider   | `roundSliderElement`   | 14      |
 | subpage       | `subpage`              | 15      |
 | subpageList   | `subpageList`          | 16      |
+| customElement | `customElement`        | 17      |

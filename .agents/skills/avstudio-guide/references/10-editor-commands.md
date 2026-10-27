@@ -103,14 +103,31 @@ Optionally add a right-click hint when the command needs a specific context (see
 
 | Command (id) | Palette title | Purpose | Context needed |
 | :--- | :--- | :--- | :--- |
-| `avstudio-editor.createProject` | Create new AVstudio project | Scaffold a full project (AVstudio UI folder + start page + skill) | Empty (or confirmed non-empty) workspace folder — modal flow with prompts |
+| `avstudio-editor.createProject` | Create new AVstudio project | Scaffold a full project (AVstudio UI folder + start page + skill + root `README.md`) | Empty (or confirmed non-empty) workspace folder — modal flow with prompts |
 | `avstudio-editor.generateAgentSkill` | Generate AVStudio skill | (Re)write `avstudio-guide` skill into `.agents/skills/` at the workspace root (overwrites) | Open workspace |
+| `avstudio-editor.generateProjectReadme` | Generate project README | (Re)write the starter `README.md` at the workspace root from `avstudio.config` `name`; asks before replacing an existing README | Open workspace with an AVstudio project |
 | `avstudio-editor.createContainer` | Add container | Add a container to the active page | Page must be open/saved |
 | `avstudio-editor.createTheme` | Add theme | Create `theme/<name>/<name>.theme` seeded with the full default theme (including its page transition keys in the `page` section), plus its companion `globalStyles.css` (QuickPick; currently only `darkhuddle`); asks before overwriting, and sets it as the active theme in `avstudio.config` `"theme"` (full project-root path, so nested folders store e.g. `theme/sub/darkhuddle/darkhuddle.theme`) | AV Studio project open (or right-click the `theme/` folder or a nested folder inside it) |
 | `avstudio-editor.createPage` | Add page | Create a new `.page` file in the explored folder inside `pages/` (or `pages/` root without context) | Explored folder or active page; accepts a uri |
 | `avstudio-editor.createDatasource` | Add datasource | Create `datasources/<name>.datasource` in the explored folder inside `datasources/` (or `datasources/` root without context) | Explored folder; accepts a uri |
 | `avstudio-editor.createDatasourceLocalDataFile` | Add local data JSON | Add `localJson` data file for a datasource | Datasource folder selected; accepts a uri |
-| `avstudio-editor.createFunction` | Add function | Create `functions/<name>.js` from the function template in the explored folder inside `functions/` (or `functions/` root without context) | Explored folder; accepts a uri |
+| `avstudio-editor.createFunction` | Add function | Create `functions/<name>.js` from the function template in the explored folder inside `functions/` (or `functions/` root without context); the file ends with the commented `window.avstudio` API hint block (same examples as the snippet submenu below) | Explored folder; accepts a uri |
+| `avstudio-editor.insertSnippet.navigate` | 🅰🆅 navigate - by URL path | Insert a `window?.avstudio?.navigate("…")` snippet at the cursor | Active JS editor (right-click → 🅰🆅 API snippets submenu); no sign-in required |
+| `avstudio-editor.insertSnippet.navigateToPage` | 🅰🆅 navigateToPage - by page name | Insert a `window?.avstudio?.navigateToPage("…")` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.publishAnalog` | 🅰🆅 publishAnalog - analog signal | Insert a `window?.avstudio?.publishAnalog({ signalName, value })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.publishDigital` | 🅰🆅 publishDigital - digital signal | Insert a `window?.avstudio?.publishDigital({ signalName, value })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.publishSerial` | 🅰🆅 publishSerial - serial signal | Insert a `window?.avstudio?.publishSerial({ signalName, value })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.getInstantDigitalFb` | 🅰🆅 getInstantDigitalFb - digital feedback | Insert a `const … = window?.avstudio?.getInstantDigitalFb({ signalName, defaultValue })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.getInstantAnalogFb` | 🅰🆅 getInstantAnalogFb - analog feedback | Insert a `const … = window?.avstudio?.getInstantAnalogFb({ signalName, defaultValue })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.getInstantSerialFb` | 🅰🆅 getInstantSerialFb - serial feedback | Insert a `const … = window?.avstudio?.getInstantSerialFb({ signalName, defaultValue })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.getDatasource` | 🅰🆅 getDatasource - datasource data | Insert a `const … = window?.avstudio?.getDatasource({ path })` snippet at the cursor (empty `path` → all datasources) | Same |
+| `avstudio-editor.insertSnippet.getVariableByName` | 🅰🆅 getVariableByName - read variable | Insert a `const … = window?.avstudio?.getVariableByName({ name })` snippet at the cursor | Same |
+| `avstudio-editor.insertSnippet.setVariableByName` | 🅰🆅 setVariableByName - write variable | Insert a `window?.avstudio?.setVariableByName({ name, value })` snippet at the cursor | Same |
+
+The `avstudio-editor.insertSnippet.*` commands above are the editor/context
+**🅰🆅 AVstudio API Functions** submenu (visible when `editorLangId == javascript`). The
+snippet bodies and the function-file hint block are generated from one source
+(`extension/src/templates/snippets.ts`), so they cannot drift apart.
 | `avstudio-editor.addVariable` | Add variable | Add a variable to `global.variables` | Accepts a uri; validates the name |
 | `avstudio-editor.createConnector.websocket` | Create new WebSocket connector | Create `connectors/<name>.websocket` in the explored folder inside `connectors/` (or `connectors/` root without context) | Explored folder; accepts a uri |
 | `avstudio-editor.createConnector` | Create new connector | QuickPick over the connector types above, then runs the matching `createConnector.<type>` command | Explored folder; accepts a uri |
@@ -134,6 +151,8 @@ Optionally add a right-click hint when the command needs a specific context (see
 | `avstudio-editor.selectEditorSize` | Select editor window size | Pick preset/custom canvas size for the editor | AV Studio editor tab open |
 | `avstudio-editor.rotateEditorDevice` | Rotate editor device | Rotate the emulated device orientation | AV Studio editor tab open |
 | `avstudio-editor.selectLogLevel` | Set Live Preview log level | Pick the **dev** log level (`silent`/`error`/`warn`/`info`/`debug`, default `debug`) for the Live Preview console; workspace-level, stored in VS Code (never in `avstudio.config`) — also reachable via the status bar "Log level" button shown when an AV Studio project is open | AV Studio project open |
+| `avstudio-editor.selectEnv` | Select active env file | Pick the active `env/*.env` file for the editor and Live Preview (one file → auto-selected, several → pick between files — no "none" state once any file exists); the status bar "env" button is ALWAYS visible while a project is open — with no env files it runs `avstudio-editor.createEnvFile` instead; the production build picks its own env file at build time | AV Studio project open |
+| `avstudio-editor.createEnvFile` | Create env file | Ask for a name (default `development.env`, `.env` appended when omitted) and create a comment-template `env/<name>.env` file, silently creating the `env/` folder when it does not exist; opens the file in a text editor — also offered by the "Create env file" button in the dynamic picker's Env informer and in the explorer context menu of the project root (`AVstudio UI`) and the `env` folder | AV Studio project open |
 | `avstudio-editor.quickActions` | *(status bar "Quick Actions")* | Show the quick actions menu (shortcuts to common editor operations) | Active AV Studio editor tab |
 | `avstudio-editor.buildProject` | Build project | Build a self-contained production project and write the archive directly into `AVstudio UI/build/` (any previous build is cleared first), using the selected `.zip` or `.ch5z` format and the name from `avstudio.config` → `archiveName`, including inline active icon sprites, the AV Studio favicon, and an `avstudio-meta.md` build metadata file | AV Studio project open |
 | `avstudio-editor.runHealthCheck` | Run Project Health Check | Re-scan the AV Studio project (structure, broken references, entity layout) and refresh its entries in the Problems panel (source `AVStudio`) | AV Studio project open |
@@ -169,7 +188,11 @@ Notes:
   `list_icon_packs` / `activate_icon_packs` / `deactivate_icon_pack`,
   `open_icon_explorer`, and `run_command` (allowlisted `avstudio-editor.*` +
   `vscode.open`, including `avstudio-editor.buildProject`). Prefer file tools for editing and these MCP tools for
-  project/editor context and UI actions.
+  project/editor context and UI actions. Note: `avstudio-editor.createFunction` via
+  `run_command` opens an interactive name prompt in the editor (the agent cannot
+  prefill the name) and requires sign-in — agents create function files directly with
+  file tools; the `insertSnippet.*` commands insert into the user's active editor
+  (a UI helper, not automation).
 
 ## Live Preview deep-dive
 
@@ -192,4 +215,5 @@ Notes:
 | User asks to open variables / page parameters / icon explorer | Tell the palette title from §1 "Other UI editors" |
 | User asks to create a page/connector/datasource/function | Agent creates the file directly (schema in references 00–09); commands are a user-facing alternative |
 | User asks "regenerate the skill" | Tell the palette title **Generate AVStudio skill** (or mention it's auto-created on new projects) |
+| User asks to add/update the project README | Tell the palette title **Generate project README** (created automatically on new projects; replacing asks for confirmation) |
 | Modal flows (createProject requires name prompts) | Do NOT simulate — instruct the user to run the palette command |

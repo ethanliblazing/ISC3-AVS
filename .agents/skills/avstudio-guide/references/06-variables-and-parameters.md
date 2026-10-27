@@ -96,6 +96,7 @@ Any string **render property** — element/container/page props and rich text HT
 | `%name%` | `currentValue` of the page parameter with key `name` (page `parameters`) |
 | `#key:path.to.value#` | a value from the element's **own attached datasource** (see §Datasource tokens) |
 | `!system:key=value(;key=value)*!` | live feedback from a control system (e.g. a Crestron join — see §External feedback tokens) |
+| `@env:KEY@` | a value from the project's **active env file** (`env/*.env` — see 00 §`env/` and §Env tokens below) |
 
 - **Name rules**: `[A-Za-z0-9_]{1,64}` — letters, digits, underscore only. The editor
   sanitizes when attaching via the dynamic picker (strips other characters, truncates
@@ -108,6 +109,11 @@ Any string **render property** — element/container/page props and rich text HT
   element's own attached datasource (§Datasource tokens). A token whose name does not
   exist in its map stays in the string as-is (typo'd names render literally — always
   match keys exactly).
+- **Env tokens** resolve **last**, after `$`/`%`/`#`/feedback: an env value is a literal
+  authored in the `.env` file (it may itself embed other tokens — env output is not
+  re-scanned afterwards, so no double resolution). An exact `@env:KEY@` keeps the env
+  value's type (numbers/booleans survive); embedded in a larger string it stringifies;
+  an unknown key stays literal. See §Env tokens below for where the values come from.
 - `activeModeIndex` supports `$name$` (variables), `%name%` (parameters) and an external
   feedback token (e.g. `!crestron:type=boolean;name=5!`), like any other render property.
   A boolean value drives it naturally: value `false` → Default state, `true` → first mode;
@@ -227,6 +233,64 @@ A **`subpageList`** instance adds an item scope: inside its `inputParameters`, t
 - A single `subpage` has no item scope — address a specific item with an index path
   (`#key:0.name#`), or switch to `subpageList` when per-item data is required.
 
+## List context parameters (`avstudio_listItemKey` / `avstudio_listItemIsSelected`)
+
+A page used as a **subpageList item** receives the list's per-item context through two
+reserved **page parameter names** (declaring them is optional — they exist implicitly,
+see below):
+
+- `avstudio_listItemKey` (string) — the item's context key: the Subpage List's
+  **List Key** setting (the element's `listKey` prop) resolved against that item, or
+  the item index (`"0"`, `"1"`, …) by default;
+- `avstudio_listItemIsSelected` (boolean) — `true` on the item whose key equals the
+  list's resolved `activeSelectedListKey` (the **List Selected Key** setting).
+
+Inside the item page they behave exactly like any page parameter
+(`%avstudio_listItemKey%`, `%avstudio_listItemIsSelected%`, rich-text
+`<parameter>`, actions). Notes:
+
+- The names are **reserved and implicit everywhere**: whether a page is used as a list
+  item cannot be judged statically (the `subpageName` target may be a dynamic token),
+  so every page's parameter store seeds both entries (an explicit declaration wins),
+  the tokens resolve on any page (`''` / `false` outside a list), and every page's
+  parameters table pins the two names in a dedicated footer section ("Subpage List
+  context", light-blue tint) below the declared parameters — column-aligned and
+  excluded from sorting and the name filter; the **actions editor is available right
+  on the row** — the first action edit
+  materializes a real declaration in the file. The create form
+  rejects these names for both page parameters and global variables. `avstudio_listItemKey` is
+  shown with the **`any`** type tag: its value may come from any datasource field and
+  is stringified (the store/file keep it `string`-typed); `avstudio_listItemIsSelected` is a
+  plain boolean.
+- The whole **`avstudio_` prefix is reserved** for system-provided names: the create
+  form refuses new parameters/variables wearing it (case-insensitive) and the health
+  check warns about them in hand-edited files — the exact list-context names are the
+  only allowed declarations under this prefix.
+- The list injects both at the item boundary and **overrides** any stored
+  `inputParameters` value for these names — the list's sidebar shows those rows as
+  read-only ("Provided by the list context"). Default value, External value setter and
+  Formatter are hidden for the reserved names — the list owns the value; the declared
+  default is what a standalone render shows.
+- The parameter's **side-effect actions** react to `avstudio_listItemIsSelected` flips in live
+  runtime (the editor preview does not run parameter actions).
+- **Formatters on variables/parameters are not executed by the runtime** (neither
+  display nor store) — a chosen `formatValueFunctionUid` is stored and validated for
+  reference integrity only. The only formatter that runs today is the datasource's
+  own `formatterFunction` (08 §Datasources), applied to the datasource result before
+  it lands anywhere. Do not rely on parameter formatters to transform
+  `avstudio_listItemKey` / `avstudio_listItemIsSelected` — transform inside the page
+  (a function action, a computed parameter) instead.
+- An injected `avstudio_listItemKey` that resolves to an empty string is dropped — the declared
+  default stands. Declaring the names is optional: a page that never declares them
+  still receives the values (implicit entries) and keeps them file-clean until an
+  action is attached.
+- The health check treats the reserved parameter tokens as always known, warns when a
+  stored `inputParameters` value sets these names and when any page declares them with
+  an externalBinding (the binding would be overridden whenever the page is used as an
+  item). It also warns when the list's `listKey` prop has no
+  item-relative token (the same key on every item), and when `activeSelectedListKey`
+  carries an item-relative token (it never resolves at list level).
+
 ## External feedback tokens (`!system:key=value!`)
 
 Any string **render property** (element/container/page props) may bind directly to live
@@ -337,6 +401,41 @@ mode applies as soon as the join changes): a boolean join drives Default vs the 
 // 4. Rich-text tags — digital / analog / serial feedback inside element.text
 "text": "<p>Bool <digital_fb signal=\"555\" true=\"On\" false=\"Off\"/> · Analog <analog_fb signal=\"7\"/> · <serial_fb signal=\"RoomName\">—</serial_fb></p>"
 ```
+
+## Env tokens (`@env:KEY@`)
+
+`@env:KEY@` references a value from the project's **active env file** — a dotenv file
+under `env/*.env` (format and selection: 00 §`env/`). Env files carry
+per-deployment constants so one project can ship to several environments without
+editing content:
+
+```jsonc
+// env/dev.env:  HOST=192.168.1.10   PORT=5442
+"webConnector": { "host": "@env:HOST@", "port": "@env:PORT@" }
+"text": "<p>Server: @env:HOST@</p>"
+```
+
+- Keys follow the same `[A-Za-z0-9_]{1,64}` charset as `$`/`%` tokens
+  (`UPPER_SNAKE_CASE` recommended). Values are type-inferred from the file:
+  `true`/`false` → boolean, JSON-style numbers → number, everything else → string.
+- **Resolution scope**: env tokens resolve wherever the render pipeline resolves
+  `$`/`%` tokens — element/container/page render props, element/page action fields and
+  datasource `inputParameters` steps — plus `avstudio.config` values and connector
+  configs (e.g. the `.web` connector's `host`/headers), resolved when a driver starts
+  against the active env values (the production build resolves them against the file
+  picked at build time); switching env in Live restarts the affected drivers. They are **not** resolved in variable- or parameter-hosted
+  action values.
+- **Which file is "active"**: editor/Live Preview use the status-bar selection
+  (`avstudio-editor.selectEnv`, workspace-level); a production build picks its own file
+  at build time (auto with a single file, asked when there are several). Unknown keys
+  stay literal, and the editor health check flags them.
+- The dynamic picker hides the Environment tab by default — a field opts in via
+  `dynamicSourceWhiteList: ["env"]` (all project-config fields use it); typing
+  `@env:KEY@` directly into any field always works. When the project has no active env
+  file — or the active file carries no values yet — the tab shows an informer under the
+  (empty) table: "Create environment" creates `env/<name>.env` (folder included) via
+  `avstudio-editor.createEnvFile`, and when the active file is empty the informer
+  offers "Open file for editing" instead (the file opens as plain text).
 
 ## `attachedDatasource` (element binding)
 

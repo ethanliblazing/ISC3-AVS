@@ -52,6 +52,9 @@ documents the shared properties; per-type properties are in `references/04-eleme
     // STATE
     "isWidget": false,          // part of a widget set
     "isStaticElement": false,   // static/decoration element
+    "isVisible": true,          // booleanish literal | dynamic token string — element hidden when set and falsy (see Visibility)
+    "isVisibleReserveSpace": false, // hidden element keeps its layout space (visibility: hidden) instead of display: none
+    "animate": "fade",          // entrance (reveal) animation preset — see Entrance animation; unset/none = no animation
     "style": {},                // React.CSSProperties — advanced escape hatch, use sparingly
     "activeModeIndex": 0,       // number | string | boolean — currently active mode
     "modes": [ /* Mode[] */ ],
@@ -183,6 +186,7 @@ Backgrounds are a **layer stack** rendered bottom → top:
     "backgroundSizeY": { "value": 100, "unit": "%" },  // SizeProperty
     "backgroundPosition": "top" | "right" | "bottom" | "left" | "center",
     "backgroundElementsBlur": 0,         // number (px) — blur of child content behind this bg
+    "transition": 200,                   // number (ms) — transition for the whole bg stack (color/image/video/gradient); unset = theme default (200ms), 0 = off
 
     // video layer — above the image, below the gradient
     "videoBackground": {
@@ -191,6 +195,7 @@ Backgrounds are a **layer stack** rendered bottom → top:
         "externalUrl": "",              // string — used when useExternalUrl is true
         "src": "assets/videos/loop.mp4",// string | null — local project asset path
         "opacity": 100,                 // number 0–100
+        "blur": 0,                      // number (px) — CSS filter blur on the video layer; 0/absent = off
         "loop": true                    // boolean — repeat forever (default true); false plays once
         // playback is autoplay + muted + object-fit: cover
         // (mp4/webm only; browser autoplay requires muted)
@@ -286,6 +291,80 @@ Keep existing extra keys (e.g. a nested `uuid`) when editing.
 
 Real default from templates: `{"position": "bottom", "offset": 1, "startOpacity": 80, "endOpacity": 0}`.
 
+## Visibility
+
+Every element can be hidden at runtime with the common `isVisible` property
+(shared by ALL element types, overridable per mode via `modeProps`).
+
+```jsonc
+{
+    "isVisible": "!crestron:type=boolean;name=12!",  // visible while join 12 is low
+    "isVisibleReserveSpace": true                     // keep the layout space while hidden
+}
+```
+
+Value forms — the same booleanish contract as the button's `isPressed`/`isDisabled`
+(04 §1):
+
+| stored value | interpretation |
+| :--- | :--- |
+| unset / `null` / `""` | **visible** — hiding is opt-in |
+| `true` / `"true"` / `"1"` / `"yes"` / any non-empty string / non-zero number | visible |
+| `false` / `"false"` / `"0"` / `0` | **hidden** |
+| `!system:key=value!` feedback token | resolved to a real boolean at render time (06 §External feedback tokens), then as above |
+
+Semantics:
+
+- An **unresolved dynamic token reads as visible** (NOT hidden) — same editor safety as
+  `isPressed`/`isDisabled`: the token stays literal while unresolved and must not hide
+  the element by accident.
+- Default hiding is `display: none` — the element is removed from layout entirely.
+- With `"isVisibleReserveSpace": true` the hidden element instead renders
+  `visibility: hidden`: it keeps its layout space, stays invisible and non-interactive
+  (useful for fixed layouts where other elements must not shift).
+- `isVisibleReserveSpace` is a plain boolean switch (not token-driven); it only changes
+  HOW a hidden element hides and never hides anything on its own.
+- Visibility resolves in the same render pass as the element's other properties
+  (`$`/`%`/`#ds`/feedback tokens all resolve), so it can be driven by a variable, a
+  parameter, a datasource value or live feedback.
+
+## Entrance animation (`animate`)
+
+Every element can play a one-shot **entrance (reveal) animation** when it appears.
+Unset / `"none"` = no animation (the default).
+
+```jsonc
+{ "animate": "fade" } // fade | slide-left | slide-right | slide-up | slide-down | zoom-in | zoom-out | pop
+```
+
+- It fires when the element is **first rendered**: initial app load, page switch, and
+  `display: none` → shown (i.e. an `isVisible` reveal). Ordinary prop edits do not replay
+  it, but **changing the preset does** — the animation class changes and CSS restarts the
+  animation (the same applies to a `modeProps.animate` override when the active mode
+  changes).
+- `isVisibleReserveSpace: true` hides with `visibility: hidden`; that does **not**
+  re-trigger the animation (the element never leaves the render tree). Use the default
+  `display: none` hiding if the reveal should play every time the element is shown.
+- Presets are the same ids as the page-transition presets (15 §Presets) and animate an
+  element-scale distance (`24px` slides) over `300ms`.
+- It is a plain CSS animation: it never interferes with the element's own state
+  transitions (pressed / hover / disabled), and nothing needs to be cleaned up after it
+  finishes.
+- Users with `prefers-reduced-motion: reduce` get no element entrance animation at all —
+  the generated stylesheet disables it for them. Page transitions are **not** covered by
+  that guard (15).
+- **The editor canvas does not animate elements** (deliberate). Check the result in the
+  **Live preview** or a production build.
+- Overriding from CSS: the generated classes are `av-anim-<preset>` (e.g.
+  `av-anim-fade`) and the keyframes are named `av-el-in-<preset>` — you may re-declare
+  either from a theme sibling stylesheet or a page `cssClass` rule. Do **not** reuse the
+  `av-el-*` / `av-page-*` keyframe names for your own animations.
+- `subpageList` items have their own pair of props (`itemAnimate` + `itemAnimateDelay`,
+  stagger) — see 04 §16.
+- **Containers cascade their nested elements**: `ContainerType.childAnimate` (preset for
+  the elements that have no own `animate`) + `childAnimateDelay` (index-based stagger,
+  capped at 1.5s) — see 02 §Nested element entrance animation.
+
 ## Modes (multi-state elements)
 
 The element's **base props are the Default state** — what renders while no mode is
@@ -342,9 +421,9 @@ Notes:
 ## cssClass defaults by type
 
 `page` · `container` · `button` · `text` · `image` · `subpage` · `subpageList` ·
-`spacerElement` · `sliderElement` · `dpadElement` · `stateControlElement` ·
-`shadesCompactElement` · `videoElement` · `inputElement` · `dateTimeElement` ·
-`rgbPickerElement` · `roundSliderElement` · `autonomicElement`.
+`customElement` · `spacerElement` · `sliderElement` · `dpadElement` ·
+`stateControlElement` · `shadesCompactElement` · `videoElement` · `inputElement` ·
+`dateTimeElement` · `rgbPickerElement` · `roundSliderElement` · `autonomicElement`.
 
 Custom classes can be styled in the active theme's companion `globalStyles.css` (see 09). Every rendered element root
 also carries the stable class `element_<type>` (e.g. `element_button`) — useful for

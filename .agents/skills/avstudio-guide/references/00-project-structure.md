@@ -19,6 +19,8 @@ AVstudio UI/
 │   ├── audio/           ← .mp3 .wav .ogg .m4a .aac
 │   ├── video/           ← .mp4 .webm .m4v
 │   └── icons/           ← icon library sprite bundles
+├── elements/            ← custom elements: one folder per element (folder name = id, shown in the Add Element picker); holds a static HTML document (root index.html preferred) + its own sibling assets, rendered by the `customElement` element inside an iframe (04 §17)
+├── env/                 ← OPTIONAL dotenv files (*.env); powers the `@env:KEY@` tokens (06 §Env tokens) — absent folder = no env values, no warnings
 └── theme/               ← per-theme folders; each holds a *.theme file (named in avstudio.config "theme") + sibling *.css / font / image dependencies (globalStyles.css), auto-injected while that theme is active
 ```
 
@@ -40,6 +42,9 @@ Notes:
 - Connector references in variables/actions/datasources are project-root paths with the
   `connectors/` prefix: `"connectors/crestron cp4.crestron"`, `"connectors/strapi.web"` —
   spaces are allowed; never reference a bare file name.
+- The generated workspace-root `.gitignore` ignores the project's `env/*.env` files
+  (except `*.example.env`) and its `build/` output folder — a project created outside
+  the extension's "Create project" flow needs those rules added by hand.
 
 ## `avstudio.config` — ProjectConfig
 
@@ -48,8 +53,8 @@ Notes:
     // REQUIRED
     "name": "My AVstudio project",          // display name
     "archiveName": "my-avstudio-project",   // used for export archive file name
-    "archiveType": ".zip",                  // ".zip" | ".ch5z"
-    "splashScreen": "",                     // image filename; string | undefined
+    "archiveType": "zip",                   // "zip" | "ch5z" (dotless; legacy dotted ".zip"/".ch5z" are accepted on read)
+    "splashScreen": "",                     // image filename under assets/images/ — picked via the config form's image select (or an "@env:KEY@" token)
     "theme": "theme/darkhuddle/darkhuddle.theme",      // path of the active .theme file relative to the project root (any nesting, e.g. "theme/dark/huddle.theme"); empty/undefined = built-in defaults
     "loglevel": "debug",                    // console log verbosity for Live Preview: "silent" | "error" | "warn" | "info" | "debug" (default "debug" = maximum verbosity when missing)
     // OPTIONAL
@@ -84,6 +89,61 @@ Level semantics (Live Preview console, DevTools console of the preview page):
   `assets/icons/<pack>.svg` exists in the project. The full list of bundles (e.g. `ai`
   AntDesign, `bi` BoxIcons, `bs` Bootstrap, `md` Material, `fa`/`fa6` Font Awesome, ...)
   is in `references/11-icons.md`.
+
+## `env/` — project environment files
+
+Optional folder holding dotenv files (`env/<name>.env`, flat). Env files carry
+per-deployment constants (hosts, ports, URLs, product keys) referenced from project
+content through `@env:KEY@` tokens (06 §Env tokens). The folder is **not** part of the
+required project structure: a project without `env/` is valid and produces no
+warnings anywhere (the editor health check only reports *unresolvable* `@env:` tokens,
+and only when tokens are actually used).
+
+Creation:
+
+- The "🅰🆅 Create env file" command (`avstudio-editor.createEnvFile`) asks for a file
+  name (default `development.env`; `.env` is appended when omitted), silently creates
+  the `env/` folder when missing, writes a comment-template `.env` file and opens it —
+  the same flow is offered by the "Create env file" button in the dynamic picker's Env
+  informer (shown when no env file is active).
+- Env files hold per-deployment values and possibly credentials, so the generated
+  workspace-root `.gitignore` ignores `env/*.env` but keeps `env/*.example.env`
+  templates. After cloning a project, recreate the env values — otherwise `@env:`
+  tokens stay unresolved and the health check reports them.
+
+Format (`env/*.env`, parsed by the editor; never executed):
+
+- one entry per line: `KEY=value` — `=` is the only separator (a `:` would break URLs);
+- blank lines and `#` comments are ignored; a `#` starts an inline comment only when
+  it is the first character of the value or follows whitespace (`URL=http://x/#anchor`
+  survives; `URL=http://x/ # comment` trims to `http://x/`);
+- values may be wrapped in `'...'` or `"..."` — quotes are stripped, content used
+  literally (no escape sequences, **no `${VAR}` interpolation**);
+- an optional `export ` prefix is tolerated (shell copy-paste);
+- keys should match `[A-Za-z0-9_]{1,64}` (`UPPER_SNAKE_CASE` recommended, not
+  enforced); a non-conforming key keeps its value but cannot be picked as a token;
+- values are type-inferred: `true`/`false` → boolean, a JSON-style number literal
+  (`5442`, `1.5`, `1e3`, `-5`; **not** `007` — leading zeros stay strings) → number,
+  everything else → string;
+- duplicate keys: the **last** definition wins.
+
+Selection semantics:
+
+- **Editor / Live Preview**: the active file is chosen via the status bar "env" item or
+  the "🅰🆅 Select active env file" command (`avstudio-editor.selectEnv`) and stored in
+  VS Code workspace state (never written into project files). There is no "none" state
+  once at least one `.env` file exists: a single file is auto-selected, and a
+  multi-file project without a stored choice falls back to the first file (sorted) —
+  the selector only switches between files. The status bar item is ALWAYS visible
+  while a project is open: without env files it reads "env: create" and runs
+  `avstudio-editor.createEnvFile`.
+- **Production build**: the build does **not** use the editor's selection — with more
+  than one `.env` file it asks which file to bake in (cancelling aborts the build);
+  one file is auto-used; no files → the build proceeds without env values, silently.
+- `avstudio.config` values (`name`, `archiveName`, `archiveType`, `splashScreen`,
+  `theme`, `loglevel`, `startPage`) may also use `@env:KEY@` tokens — they resolve
+  against the active env file the same way (per-build in production). `archiveType`
+  from env is written dotless (`zip` / `ch5z`, any case; a leading dot is tolerated).
 
 ## `global.slots` — GlobalSlotsPayload
 

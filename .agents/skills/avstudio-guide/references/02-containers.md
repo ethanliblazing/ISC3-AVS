@@ -10,7 +10,7 @@ supported and produce a blank canvas. Build grids from multiple top-level contai
 
 Element types: `button | text | image | spacer | shadesCompact | dpad | stateControl |
 input | dateTime | video | slider | autonomic | rgbPicker | roundSlider | subpage |
-subpageList` (see 04 + 03 for full schemas).
+subpageList | customElement` (see 04 + 03 for full schemas).
 
 ## Full schema
 
@@ -53,9 +53,44 @@ subpageList` (see 04 + 03 for full schemas).
     "scrollMode": "scroll",           // "disabled" (no scroll) | "scroll" (visible bar) | "scrollHidden" (scrollable, bar hidden); unset → inherit theme container.scrollMode
     "scrollSnap": false,              // CSS scroll snap (scroll-snap-type: both mandatory + scroll-snap-align on elements); off by default
     "scrollSnapAlign": "start",       // "start" | "center" | "end"; snap alignment of the elements, applies when scrollSnap is on (default "start")
-    "scrollbarThumbBackground": "auto" // CSS color or "auto"; unset → inherit theme --av-container-scrollbarThumbBackground
+    "scrollbarThumbBackground": "auto", // CSS color or "auto"; unset → inherit theme --av-container-scrollbarThumbBackground
+
+    // ANIMATION (nested elements — see "Nested element entrance animation")
+    "childAnimate": "fade",           // entrance preset for elements that have no own `animate`; unset/none = no animation
+    "childAnimateDelay": 60           // stagger step (ms): element N starts at N × step (total spread capped at 1.5s); unset/0 = all together
 }
 ```
+
+## Nested element entrance animation (`childAnimate` / `childAnimateDelay`)
+
+A container can reveal its nested elements as a staggered cascade — the same
+mechanism `subpageList` uses for its repeated items (04 §16).
+
+```jsonc
+{
+    "childAnimate": "slide-up",   // preset for the elements that have no own `animate`
+    "childAnimateDelay": 60       // element N starts at N × 60ms
+}
+```
+
+Rules:
+
+- **The element's own `animate` always wins.** The container preset applies only to
+  elements that set no `animate` themselves; an element with its own preset keeps it.
+  An explicit `"animate": "none"` on an element opts it out of the container cascade.
+- **The delay is a container-level decision.** It applies to every element that ends up
+  animating (own preset or inherited), indexed by its position in `elements`. Unset/`0`
+  = all elements animate together.
+- **The spread is capped at 1.5s**: `effective step = min(childAnimateDelay, 1500 /
+  elementCount)`, so a container with many elements compresses the step instead of
+  waiting seconds for the last one.
+- **Index-based, not visibility-based**: a hidden element (`isVisible: false`) keeps its
+  index slot; when it is later revealed it plays with that index's delay.
+- It is the same one-shot CSS animation as the element-level `animate` (03 §Entrance
+  animation): fires on first render (page load / page switch / `isVisible` reveal) and on
+  page remount.
+- **The editor canvas does not animate elements** (deliberate) — check the result in the
+  Live preview or a production build.
 
 ## Grid building rules
 
